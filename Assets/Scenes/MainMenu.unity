@@ -9511,7 +9511,7 @@ MonoBehaviour:
   _saveSkin: {fileID: 1534573979}
   _closeSkinMenu: {fileID: 1410803311}
   _startMenu: {fileID: 629236219}
-  _prefab: {fileID: 36531551190647089, guid: e56f0e2b650fbd74a81b39d6065bc1e7, type: 3}
+  _prefabSkinSelected: {fileID: 0}
 --- !u!1 &1508357789
 GameObject:
   m_ObjectHideFlags: 0

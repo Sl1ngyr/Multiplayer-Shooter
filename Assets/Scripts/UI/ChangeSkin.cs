@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,18 +13,21 @@ namespace UI
 
         [SerializeField] private Canvas _startMenu;
         
-        [SerializeField] private SpriteRenderer _prefab;
+        [SerializeField] private SpriteRenderer _prefabSkinSelected;
+
+        private Sprite _skinSelected;
         
         private void SelectSkin()
         {
             var button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
             var image = button.GetComponent<Image>();
-            _prefab.sprite = image.sprite;
+            
+            _skinSelected = image.sprite;
         }
 
         private void SaveSkin()
         {
-            PrefabUtility.SaveAsPrefabAsset(_prefab.gameObject, "Assets/Resources/Prefabs/Player.prefab");
+            _prefabSkinSelected.sprite = _skinSelected;
             CloseSkinMenu();
         }
 

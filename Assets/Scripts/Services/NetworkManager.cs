@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using Fusion;
 using Fusion.Sockets;
+using Joystick_Pack.Scripts.Joysticks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 
 namespace Services
 {
@@ -12,19 +14,19 @@ namespace Services
         [SerializeField] private NetworkPrefabRef _playerPrefab;
         [SerializeField] private FixedJoystick _movementController;
         [SerializeField] private FixedJoystick _shotController;
-        
-        private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
-        private NetworkRunner _runner;
 
-        private void Start()
+        private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
+        private NetworkRunner _networkRunner;
+
+        private void Awake()
         {
+            _networkRunner = GetComponent<NetworkRunner>();
             StartGame();
         }
 
         private async void StartGame()
         {
-            _runner = gameObject.AddComponent<NetworkRunner>();
-            _runner.ProvideInput = true;
+            _networkRunner.ProvideInput = true;
             
             var scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
             var sceneInfo = new NetworkSceneInfo();
@@ -32,7 +34,7 @@ namespace Services
                 sceneInfo.AddSceneRef(scene, LoadSceneMode.Additive);
             }
             
-            await _runner.StartGame(new StartGameArgs()
+            await _networkRunner.StartGame(new StartGameArgs()
             {
                 GameMode = GameMode.AutoHostOrClient,
                 SessionName = "TestRoom",

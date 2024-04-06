@@ -1,8 +1,11 @@
 using Fusion;
 using UnityEngine;
 
-public struct NetworkInputData : INetworkInput
+namespace Services
 {
-    public Vector2 Direction;
-    public Vector2 Aim;
+    public struct NetworkInputData : INetworkInput
+    {
+        public Vector2 Direction;
+        public Vector2 Aim;
+    }
 }
