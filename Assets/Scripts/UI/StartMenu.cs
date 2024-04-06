@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -34,6 +33,7 @@ namespace UI
         private void EnterChangeSkin()
         {
             _changeSkinCanvas.gameObject.SetActive(true);
+            gameObject.SetActive(false);
         }
 
         private void ExitGame()
