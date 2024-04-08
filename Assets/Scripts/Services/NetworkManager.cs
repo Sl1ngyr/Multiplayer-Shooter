@@ -6,16 +6,14 @@ using Joystick_Pack.Scripts.Joysticks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 namespace Services
 {
     public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     {
-        [SerializeField] private NetworkPrefabRef _playerPrefab;
         [SerializeField] private FixedJoystick _movementController;
         [SerializeField] private FixedJoystick _shotController;
 
-        private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
+        private string _sessionName = "TestRoom";
         private NetworkRunner _networkRunner;
 
         private void Awake()
@@ -37,31 +35,12 @@ namespace Services
             await _networkRunner.StartGame(new StartGameArgs()
             {
                 GameMode = GameMode.AutoHostOrClient,
-                SessionName = "TestRoom",
+                SessionName = _sessionName,
                 Scene = scene,
                 SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
             });
         }
         
-        public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
-        {
-            if (runner.IsServer)
-            {
-                Vector2 spawnPosition = Vector2.zero;
-                NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
-                _spawnedCharacters.Add(player, networkPlayerObject);
-            }
-        }
-
-        public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
-        {
-            if (_spawnedCharacters.TryGetValue(player, out NetworkObject networkObject))
-            {
-                runner.Despawn(networkObject);
-                _spawnedCharacters.Remove(player);
-            }
-        }
-
         public void OnInput(NetworkRunner runner, NetworkInput input)
         {
             var data = new NetworkInputData()
@@ -73,6 +52,8 @@ namespace Services
             input.Set(data);
         }
         
+        public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) {}
+        public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) {}
         public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) {}
         public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) {}
         public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) {}
