@@ -1,39 +1,32 @@
-﻿using System;
-using Fusion;
+﻿using Fusion;
 using Player;
 using Services;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 namespace Weapon
 {
     public class WeaponController : NetworkBehaviour
     {
-        [SerializeField] private Gun _weaponPrefab;
-
+        [SerializeField] private GameObject _spawnPoint;
+        
         private Gun _currentWeapon;
         private string nameWeapon;
         [Networked] private TickTimer _shootDelay { get; set; }
         
         private WeaponData _weaponData;
         
-        public void InitWeaponData(WeaponData weaponData)
+        public void InitWeaponData(WeaponData weaponData, NetworkObject gun)
         {
+            _currentWeapon = gun.GetComponent<Gun>();
             _weaponData = weaponData;
-            nameWeapon = _weaponData.Sprite.name;
-            //RPC_InitWeapon(nameWeapon);
+            RPC_SetWeapon();
         }
 
-        private void Start()
+        [Rpc]
+        private void RPC_SetWeapon()
         {
-            InitWeapon();
-        }
-        
-        private void InitWeapon()
-        {
-            _currentWeapon = Runner.Spawn(_weaponPrefab, transform.position, Quaternion.identity, Object.InputAuthority);
-            _currentWeapon.transform.parent = transform;
-            _currentWeapon.Init(Resources.Load<Sprite>("Sprites/" + nameWeapon));
+            _currentWeapon.transform.parent = _spawnPoint.transform;
         }
         
         public override void FixedUpdateNetwork()
@@ -56,9 +49,5 @@ namespace Weapon
             }
         }
 
-        
-        
-        
-        
     }
 }

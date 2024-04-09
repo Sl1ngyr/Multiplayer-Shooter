@@ -10,7 +10,7 @@ namespace Player
         
         private Rigidbody2D _rigidbody2D;
 
-        private void Start()
+        public override void Spawned()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
         }

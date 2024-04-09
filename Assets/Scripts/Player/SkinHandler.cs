@@ -1,13 +1,14 @@
-﻿using UnityEngine;
+﻿using Fusion;
+using UnityEngine;
 
 namespace Player
 {
-    public class SkinHandler : MonoBehaviour
+    public class SkinHandler : NetworkBehaviour
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private SpriteRenderer _selectedSkin;
 
-        private void Awake()
+        public override void Spawned()
         {
             PutOnSelectedSkin();
         }

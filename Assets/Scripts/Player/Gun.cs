@@ -5,15 +5,9 @@ namespace Player
 {
     public class Gun : NetworkBehaviour
     {
-        [SerializeField] public SpriteRenderer _spriteRenderer;
         [SerializeField] private Bullet _bulletPrefab;
         [SerializeField] private Transform firePoint;
-        
-        public void Init(Sprite sprite)
-        {
-            _spriteRenderer.sprite = sprite;
-        }
-        
+
         public void RotateGun(Vector2 direction)
         {
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - transform.rotation.y;

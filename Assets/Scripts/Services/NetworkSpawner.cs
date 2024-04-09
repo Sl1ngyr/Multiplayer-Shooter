@@ -10,6 +10,7 @@ namespace Services
         [SerializeField] private NetworkPrefabRef _playerPrefab;
         [SerializeField] private List<WeaponData> _weaponDatas;
         [SerializeField] private NetworkRunner _networkRunner;
+        [SerializeField] private List<NetworkObject> _playerGuns;
         
         private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
         
@@ -33,17 +34,17 @@ namespace Services
         private void SpawnPlayer(PlayerRef player)
         {
             int weaponNumber = Random.Range(0, _weaponDatas.Count);
-            var gun = _weaponDatas[weaponNumber];
+            NetworkObject gun = _playerGuns[weaponNumber];
+            _playerGuns.RemoveAt(weaponNumber);
+            
             Vector2 spawnPosition = Vector2.zero;
             
             NetworkObject networkPlayerObject = _networkRunner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
+            NetworkObject networkGunObject = _networkRunner.Spawn(gun, spawnPosition, Quaternion.identity, player);
 
-            string name = _weaponDatas[weaponNumber].name;
+            networkPlayerObject.GetComponent<WeaponController>().InitWeaponData(_weaponDatas[weaponNumber], networkGunObject);
             
-            networkPlayerObject.GetComponent<WeaponController>().InitWeaponData(_weaponDatas[weaponNumber]);
             _spawnedCharacters.Add(player, networkPlayerObject);
-            
-            _weaponDatas.Remove(gun);
         }
         
     }
