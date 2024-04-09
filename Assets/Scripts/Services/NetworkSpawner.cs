@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Fusion;
+using UI;
 using UnityEngine;
 using Weapon;
 
@@ -7,17 +8,20 @@ namespace Services
 {
     public class NetworkSpawner : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     {
-        [SerializeField] private NetworkPrefabRef _playerPrefab;
+        [SerializeField] private List<NetworkObject> _playerPrefab;
         [SerializeField] private List<WeaponData> _weaponDatas;
         [SerializeField] private NetworkRunner _networkRunner;
         [SerializeField] private List<NetworkObject> _playerGuns;
         
         private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
+
+        private string _skinName;
         
         public void PlayerJoined(PlayerRef player)
         {
             if (_networkRunner.IsServer)
             {
+                RPC_SetSkinName();
                 SpawnPlayer(player);
             }
         }
@@ -39,12 +43,28 @@ namespace Services
             
             Vector2 spawnPosition = Vector2.zero;
             
-            NetworkObject networkPlayerObject = _networkRunner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
+            NetworkObject skinPlayer = new NetworkObject();
+            
+            foreach (var prefab in _playerPrefab)
+            {
+                if (prefab.gameObject.name == _skinName)
+                {
+                    skinPlayer = prefab;
+                }
+            }
+            
+            NetworkObject networkPlayerObject = _networkRunner.Spawn(skinPlayer, spawnPosition, Quaternion.identity, player);
             NetworkObject networkGunObject = _networkRunner.Spawn(gun, spawnPosition, Quaternion.identity, player);
 
             networkPlayerObject.GetComponent<WeaponController>().InitWeaponData(_weaponDatas[weaponNumber], networkGunObject);
             
             _spawnedCharacters.Add(player, networkPlayerObject);
+        }
+
+        [Rpc]
+        private void RPC_SetSkinName()
+        {
+            _skinName = PlayerPrefs.GetString(ChangeSkin.PLAYER_PREFS_SKIN);
         }
         
     }

@@ -26,7 +26,9 @@ namespace Weapon
         [Rpc]
         private void RPC_SetWeapon()
         {
+            _currentWeapon.transform.position = _spawnPoint.transform.position;
             _currentWeapon.transform.parent = _spawnPoint.transform;
+            
         }
         
         public override void FixedUpdateNetwork()

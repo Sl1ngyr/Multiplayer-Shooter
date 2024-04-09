@@ -13,21 +13,19 @@ namespace UI
 
         [SerializeField] private Canvas _startMenu;
         
-        [SerializeField] private SpriteRenderer _prefabSkinSelected;
-
-        private Sprite _skinSelected;
+        public const string PLAYER_PREFS_SKIN = "Skin";
         
         private void SelectSkin()
         {
             var button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-            var image = button.GetComponent<Image>();
-            
-            _skinSelected = image.sprite;
+            var skinName = button.GetComponent<ButtonSkinsDescription>().SkinName;
+            Debug.Log(skinName + "Selected skin");
+            PlayerPrefs.SetString(PLAYER_PREFS_SKIN, skinName);
+            Debug.Log(PlayerPrefs.GetString(ChangeSkin.PLAYER_PREFS_SKIN) + "NOW SKin");
         }
 
         private void SaveSkin()
         {
-            _prefabSkinSelected.sprite = _skinSelected;
             CloseSkinMenu();
         }
 

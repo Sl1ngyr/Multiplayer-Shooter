@@ -5683,7 +5683,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab:
-    RawGuidValue: e56f0e2b650fbd74a81b39d6065bc1e7
+  - {fileID: 6458400567723347767, guid: e56f0e2b650fbd74a81b39d6065bc1e7, type: 3}
+  - {fileID: 6458400567723347767, guid: e6e85afc9e076c74c8d25fac552f1662, type: 3}
+  - {fileID: 6458400567723347767, guid: 369631d6d61acb04c846aba334689d0a, type: 3}
   _weaponDatas:
   - {fileID: 11400000, guid: 9b39577aca890ae40aa7e08732130bf8, type: 2}
   - {fileID: 11400000, guid: 60d738ad800bc8d4ebf3ce842e38ecfd, type: 2}

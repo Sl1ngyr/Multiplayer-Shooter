@@ -14,7 +14,7 @@ namespace Player
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
         }
-
+        
         public override void FixedUpdateNetwork()
         {
             var input = GetInput(out NetworkInputData data);
