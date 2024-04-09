@@ -1,6 +1,6 @@
 ﻿using Fusion;
 using Player;
-using Services;
+using Services.Network;
 using UnityEngine;
 
 
@@ -10,10 +10,9 @@ namespace Weapon
     {
         [SerializeField] private GameObject _spawnPoint;
         
-        private Gun _currentWeapon;
-        private string nameWeapon;
         [Networked] private TickTimer _shootDelay { get; set; }
         
+        private Gun _currentWeapon;
         private WeaponData _weaponData;
         
         public void InitWeaponData(WeaponData weaponData, NetworkObject gun)

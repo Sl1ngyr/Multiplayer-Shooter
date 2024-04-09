@@ -1,6 +1,7 @@
 ﻿using Fusion;
 using Player.AnimationStates;
 using Services;
+using Services.Network;
 using UnityEngine;
 
 namespace Player
@@ -15,7 +16,7 @@ namespace Player
         public override void Spawned()
         {
             _animator = GetComponent<Animator>();
-            _animationBehavior = new AnimationBehaviorIdle(_animator);
+            _animationBehavior = new AnimationBehaviorPlayerIdle(_animator);
             _animationBehavior.Enter();
         }
 
@@ -26,13 +27,13 @@ namespace Player
             if (data.Direction.magnitude > 0)
             {
                 _animationBehavior.Exit();
-                _animationBehavior = new AnimationBehaviorRun(_animator);
+                _animationBehavior = new AnimationBehaviorPlayerRun(_animator);
                 _animationBehavior.Enter();
             }
             else
             {
                 _animationBehavior.Exit();
-                _animationBehavior = new AnimationBehaviorIdle(_animator);
+                _animationBehavior = new AnimationBehaviorPlayerIdle(_animator);
                 _animationBehavior.Enter();
             }
         }

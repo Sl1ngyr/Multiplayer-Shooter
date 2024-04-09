@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-public enum ShotType
-{
-    Single,
-    Shotgun
-}
-
 namespace Weapon
 {
+    public enum ShotType
+    {
+        Single,
+        Shotgun
+    }
+
     [CreateAssetMenu(fileName = "WeaponData", menuName = "ScriptableObjects/WeaponData")]
     public class WeaponData : ScriptableObject
     {

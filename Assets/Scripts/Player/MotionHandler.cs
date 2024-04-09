@@ -1,5 +1,5 @@
 ﻿using Fusion;
-using Services;
+using Services.Network;
 using UnityEngine;
 
 namespace Player
@@ -24,14 +24,21 @@ namespace Player
                 _rigidbody2D.MovePosition(transform.position + Runner.DeltaTime * _speed * (Vector3)data.Direction);
             }
 
-            if (data.Direction.x > 0)
+            RPC_ChangeLocalScale(data.Direction.x);
+        }
+
+        [Rpc]
+        private void RPC_ChangeLocalScale(float directionX)
+        {
+            if (directionX > 0)
             {
                 _rigidbody2D.transform.localScale = new Vector2(1, 1);
             }
-            else if (data.Direction.x < 0)
+            if (directionX < 0)
             {
                 _rigidbody2D.transform.localScale = new Vector2(-1, 1);
             }
         }
+        
     }
 }
