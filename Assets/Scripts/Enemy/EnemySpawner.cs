@@ -6,7 +6,7 @@ namespace Enemy
 {
     public class EnemySpawner : NetworkBehaviour
     {
-        [SerializeField] private EnemyRange _enemyRange;
+        [SerializeField] private EnemyMelee _enemyRange;
         [SerializeField] private NetworkSpawner _networkSpawner;
         
         
@@ -18,10 +18,10 @@ namespace Enemy
             {
                 targetPos = target.Value.transform;
             }
-                
+            
             Runner.Spawn(_enemyRange, transform.position, transform.rotation, Object.InputAuthority, ((runner, o) =>
             {
-                o.GetComponent<EnemyRange>().Init(targetPos);
+                o.GetComponent<EnemyMelee>().Init(targetPos);
             }));
         }
     }

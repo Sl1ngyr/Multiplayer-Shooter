@@ -1,10 +1,8 @@
 ﻿using Fusion;
-using Player;
 using Services.Network;
 using UnityEngine;
 
-
-namespace Weapon
+namespace Player.Weapon
 {
     public class WeaponController : NetworkBehaviour
     {

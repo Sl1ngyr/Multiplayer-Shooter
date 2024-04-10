@@ -2,8 +2,8 @@
 using Fusion;
 using UI;
 using UnityEngine;
-using Weapon;
 using Enemy;
+using Player.Weapon;
 
 namespace Services.Network
 {

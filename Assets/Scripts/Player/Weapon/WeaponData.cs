@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Weapon
+namespace Player.Weapon
 {
     public enum ShotType
     {
