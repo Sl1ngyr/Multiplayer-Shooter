@@ -9,12 +9,12 @@ namespace Player
         [SerializeField] private float _speed;
         
         private Rigidbody2D _rigidbody2D;
-
+        
         public override void Spawned()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
         }
-        
+
         public override void FixedUpdateNetwork()
         {
             var input = GetInput(out NetworkInputData data);
