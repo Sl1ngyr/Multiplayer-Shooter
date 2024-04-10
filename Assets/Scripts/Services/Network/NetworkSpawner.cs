@@ -3,6 +3,7 @@ using Fusion;
 using UI;
 using UnityEngine;
 using Enemy;
+using Player;
 using Player.Weapon;
 
 namespace Services.Network
@@ -14,6 +15,8 @@ namespace Services.Network
         [SerializeField] private NetworkRunner _networkRunner;
         [SerializeField] private List<NetworkObject> _playerGuns;
         [SerializeField] private EnemySpawner _enemySpawner;
+        [SerializeField] private HealthView _healthView;
+        
         private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
         private Dictionary<PlayerRef, NetworkObject> _spawnedWeapons = new Dictionary<PlayerRef, NetworkObject>();
         
@@ -68,6 +71,7 @@ namespace Services.Network
             NetworkObject networkGunObject = _networkRunner.Spawn(gun, spawnPosition, Quaternion.identity, player);
 
             networkPlayerObject.GetComponent<WeaponController>().InitWeaponData(_weaponDatas[weaponNumber], networkGunObject);
+            networkPlayerObject.GetComponent<HealthSystem>().Init(_healthView);
             
             _spawnedCharacters.Add(player, networkPlayerObject);
             _spawnedWeapons.Add(player,networkGunObject);

@@ -18,6 +18,8 @@ namespace Enemy
         protected bool IsReachTarget = false;
 
         protected abstract void Attack();
+
+        public int EnemyDamage => EnemyData.Damage;
         
         public bool ReachTarget
         {

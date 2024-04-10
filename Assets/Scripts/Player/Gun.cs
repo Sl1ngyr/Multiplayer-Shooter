@@ -15,7 +15,7 @@ namespace Player
             transform.rotation = rotation;
         }
         
-        public void CreateBullet(Transform _playerTransform, float damage, float distance)
+        public void CreateBullet(Transform _playerTransform, int damage, float distance)
         {
             Runner.Spawn(_bulletPrefab, firePoint.transform.position, transform.rotation, Object.InputAuthority, ((runner, o) =>
             {
