@@ -47,10 +47,9 @@ namespace Player
                 Runner.Despawn(Object);
             }
 
-            if (coll.TryGetComponent(out MotionHandler player))
+            if (coll.TryGetComponent(out PlayerHealthSystem player))
             {
                 if(BulletOwner != BulletOwner.Enemy) return;
-                
                 Runner.Despawn(Object);
             }
         }

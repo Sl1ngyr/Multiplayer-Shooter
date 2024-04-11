@@ -84,12 +84,11 @@ namespace Enemy
         
         protected void TakeDamageAnimation()
         {
-            if (!IsEnemyDeath)
-            {
-                EnemyAnimationBehavior.Exit();
-                EnemyAnimationBehavior = new AnimationBehaviorEnemyHit(Animator);
-                EnemyAnimationBehavior.Enter();
-            }
+            if(IsEnemyDeath) return;
+            
+            EnemyAnimationBehavior.Exit();
+            EnemyAnimationBehavior = new AnimationBehaviorEnemyHit(Animator);
+            EnemyAnimationBehavior.Enter();
         }
         
         [Rpc]

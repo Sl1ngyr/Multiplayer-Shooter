@@ -26,6 +26,7 @@ namespace Enemy
 
         protected override void ActionsBeforeDie()
         {
+            if(IsEnemyDeath) return;
             IsEnemyDeath = true;
             
             EnemyAnimationBehavior.Exit();
@@ -33,7 +34,6 @@ namespace Enemy
             EnemyAnimationBehavior.Enter();
 
             RigidbodyEnemy2D.isKinematic = true;
-
             gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
             
             DelayToDeath = TickTimer.CreateFromSeconds(Runner, TimeToDespawn);

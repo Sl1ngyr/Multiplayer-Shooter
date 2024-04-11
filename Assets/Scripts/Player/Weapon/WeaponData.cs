@@ -16,11 +16,13 @@ namespace Player.Weapon
         [SerializeField] private int _damage;
         [SerializeField] private float _shootDelay;
         [SerializeField] private ShotType _shotType;
-
+        [SerializeField] private int _numberOfBullets;
+        
         public Sprite Sprite => _sprite;
         public float AttackDistance => _attackDistance;
         public int Damage => _damage;
         public float ShootDelay => _shootDelay;
         public ShotType ShootTypeWeapon => _shotType;
+        public int NumberOfBullets => _numberOfBullets;
     }
 }

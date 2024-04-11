@@ -9,7 +9,7 @@ namespace Player
     {
         public Action<int> OnPlayerTakeDamage;
 
-        private void OnTriggerExit2D(Collider2D coll)
+        private void OnTriggerEnter2D(Collider2D coll)
         {
             if (coll.TryGetComponent(out Bullet enemyBullet))
             {
@@ -19,10 +19,10 @@ namespace Player
                 }
             }
 
-            if (coll.transform.parent.TryGetComponent(out BaseEnemyController enemyWeaponParent))
+            /*if (coll.transform.parent.TryGetComponent(out EnemyMelee enemyWeaponParent))
             {
                 OnPlayerTakeDamage?.Invoke(enemyWeaponParent.EnemyDamage);
-            }
+            }*/
         }
     }
 }

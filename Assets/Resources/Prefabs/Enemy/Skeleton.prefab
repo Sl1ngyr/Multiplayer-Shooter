@@ -133,7 +133,7 @@ MonoBehaviour:
   ApplyTiming: 2
   SyncSettings: 79
   StateHashes: 0000000020e23b685928a8ce1ae6174d48bc6864a1609f62d8aa0cc4
-  TriggerHashes: 00000000a1609f620d286c40
+  TriggerHashes: 00000000a1609f62
 --- !u!114 &7969834403612647229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,8 +217,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.019923925}
-  m_Size: {x: 1, y: 1.0398479}
+  m_Offset: {x: -0.01434359, y: -0.019923925}
+  m_Size: {x: 0.78771466, y: 1.0398479}
   m_Direction: 0
 --- !u!114 &8399238295897104608
 MonoBehaviour:
