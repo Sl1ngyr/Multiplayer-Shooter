@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 6483242376686532695}
   - component: {fileID: 8073092958394990158}
   - component: {fileID: 1061127772459821851}
-  - component: {fileID: 8243571941344427889}
+  - component: {fileID: 4256108820797994930}
   - component: {fileID: 7396716328543232471}
   - component: {fileID: 8515321472924901849}
   m_Layer: 3
@@ -114,7 +114,7 @@ MonoBehaviour:
   - {fileID: 3739375692302431039}
   - {fileID: 6483242376686532695}
   - {fileID: 8073092958394990158}
-  - {fileID: 8243571941344427889}
+  - {fileID: 4256108820797994930}
   - {fileID: 7396716328543232471}
   - {fileID: 5473068200481238274}
   - {fileID: 1436957549358619955}
@@ -238,7 +238,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8243571941344427889
+--- !u!114 &4256108820797994930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,11 +247,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1807945876422873707}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4d17a0b37534fd094ef1ce718754255, type: 3}
+  m_Script: {fileID: 11500000, guid: 2092e6e22ba947028ad676ca494c5930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHealth: 10000
   _animationController: {fileID: 955590648415468005}
-  _maxHealth: 15
 --- !u!114 &7396716328543232471
 MonoBehaviour:
   m_ObjectHideFlags: 0

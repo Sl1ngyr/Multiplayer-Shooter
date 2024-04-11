@@ -1,14 +1,15 @@
-﻿using Fusion;
+﻿using Enemy;
+using Fusion;
 using UnityEngine;
-
-public enum BulletOwner
-{
-    Player,
-    Enemy
-}
 
 namespace Player
 {
+    public enum BulletOwner
+    {
+        Player,
+        Enemy
+    }
+
     public class Bullet : NetworkBehaviour
     {
         [SerializeField] private float _speed = 10f;
@@ -18,7 +19,7 @@ namespace Player
         private int _damage;
         private float _turn;
 
-        public BulletOwner _BulletOwner;
+        public BulletOwner BulletOwner;
 
         public int Damage => _damage;
         
@@ -26,7 +27,7 @@ namespace Player
         {
             _turn = turn;
             _damage = damage;
-            life = TickTimer.CreateFromSeconds(Runner, despawnTime);
+            life = TickTimer.CreateFromSeconds(Runner, despawnTime / _speed);
         }
 
         public override void FixedUpdateNetwork()
@@ -35,6 +36,23 @@ namespace Player
                 Runner.Despawn(Object);
             else
                 transform.position += (transform.right * _turn) * Runner.DeltaTime * _speed;
+        }
+
+        private void OnTriggerEnter2D(Collider2D coll)
+        {
+            if (coll.TryGetComponent(out BaseEnemyController enemy))
+            {
+                if(BulletOwner != BulletOwner.Player) return;
+                
+                Runner.Despawn(Object);
+            }
+
+            if (coll.TryGetComponent(out MotionHandler player))
+            {
+                if(BulletOwner != BulletOwner.Enemy) return;
+                
+                Runner.Despawn(Object);
+            }
         }
     }
 }

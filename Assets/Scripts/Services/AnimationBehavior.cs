@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Player.AnimationStates
+namespace Services
 {
     public abstract class AnimationBehavior
     {

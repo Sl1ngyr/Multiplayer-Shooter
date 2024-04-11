@@ -1,6 +1,6 @@
 ﻿using Enemy.AnimationStates;
 using Fusion;
-using Player.AnimationStates;
+using Services;
 using UnityEngine;
 
 namespace Enemy
@@ -8,18 +8,23 @@ namespace Enemy
     public abstract class BaseEnemyController : NetworkBehaviour
     {
         [SerializeField] protected EnemyData EnemyData;
+        [SerializeField] protected float TimeToDespawn;
         
         [Networked] protected TickTimer AttackDelay { get; set; }
+        [Networked] protected TickTimer DelayToDeath { get; set; }
         
-        protected Rigidbody2D Rigidbody2D;
+        protected Rigidbody2D RigidbodyEnemy2D;
         protected Animator Animator;
         protected AnimationBehavior EnemyAnimationBehavior;
         protected Transform TargetToFollow;
-        protected bool IsReachTarget = false;
+        protected EnemyCollisionDetector CollisionDetector;
+        protected EnemyHealthSystem EnemyHealthSystem;
 
-        protected abstract void Attack();
+        protected bool IsReachTarget = false;
+        protected bool IsEnemyDeath = false;
 
         public int EnemyDamage => EnemyData.Damage;
+        public int EnemyHP => EnemyData.HP;
         
         public bool ReachTarget
         {
@@ -34,45 +39,79 @@ namespace Enemy
         
         public override void Spawned()
         {
-            Rigidbody2D = GetComponent<Rigidbody2D>();
+            EnemyHealthSystem = GetComponent<EnemyHealthSystem>();
+            CollisionDetector = GetComponent<EnemyCollisionDetector>();
+            RigidbodyEnemy2D = GetComponent<Rigidbody2D>();
             Animator = GetComponent<Animator>();
             EnemyAnimationBehavior = new AnimationBehaviorEnemyRun(Animator);
             EnemyAnimationBehavior.Enter();
+
+            CollisionDetector.OnEnemyActionsWhenTakeDamage += TakeDamageAnimation;
+            EnemyHealthSystem.OnEnemyDeath += ActionsBeforeDie;
         }
 
+        public override void FixedUpdateNetwork()
+        {
+            FollowToTarget();
+        }
+        
         protected void FollowToTarget()
         {
             RPC_ChangeScale(TargetToFollow.transform.position.x);
             
-            if (!IsReachTarget)
+            if (!IsReachTarget && !IsEnemyDeath)
             {
-                EnemyAnimationBehavior.Exit();
-                EnemyAnimationBehavior = new AnimationBehaviorEnemyRun(Animator);
-                EnemyAnimationBehavior.Enter();
-                
                 Vector3 direction = (TargetToFollow.transform.position - gameObject.transform.position).normalized;
                 Vector3 positionToMove = transform.position + (EnemyData.Speed * Runner.DeltaTime * direction);
             
-                Rigidbody2D.MovePosition(positionToMove);
+                RigidbodyEnemy2D.MovePosition(positionToMove);
             }
-            else if (IsReachTarget && HasStateAuthority && AttackDelay.ExpiredOrNotRunning(Runner))
+            else if (IsReachTarget && HasStateAuthority && AttackDelay.ExpiredOrNotRunning(Runner) && !IsEnemyDeath)
             {
                 Attack();
                 AttackDelay = TickTimer.CreateFromSeconds(Runner, EnemyData.AttackDelay);
             }
+            else if (IsEnemyDeath && DelayToDeath.ExpiredOrNotRunning(Runner))
+            {
+                EnemyDeath();
+            }
         }
 
+        protected void EnemyDeath()
+        {
+            Runner.Despawn(Object);
+        }
+        
+        protected void TakeDamageAnimation()
+        {
+            if (!IsEnemyDeath)
+            {
+                EnemyAnimationBehavior.Exit();
+                EnemyAnimationBehavior = new AnimationBehaviorEnemyHit(Animator);
+                EnemyAnimationBehavior.Enter();
+            }
+        }
+        
         [Rpc]
         protected void RPC_ChangeScale(float directionX)
         {
             if (directionX > transform.position.x)
             {
-                Rigidbody2D.transform.localScale = new Vector2(1, 1);
+                RigidbodyEnemy2D.transform.localScale = new Vector2(1, 1);
             }
             else if (directionX < transform.position.x)
             {
-                Rigidbody2D.transform.localScale = new Vector2(-1, 1);
+                RigidbodyEnemy2D.transform.localScale = new Vector2(-1, 1);
             }
+        }
+        
+        protected abstract void Attack();
+        protected abstract void ActionsBeforeDie();
+        
+        private void OnDisable()
+        { 
+            CollisionDetector.OnEnemyActionsWhenTakeDamage -= TakeDamageAnimation;
+            EnemyHealthSystem.OnEnemyDeath -= ActionsBeforeDie;
         }
         
     }

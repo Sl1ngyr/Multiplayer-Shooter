@@ -71,7 +71,7 @@ namespace Services.Network
             NetworkObject networkGunObject = _networkRunner.Spawn(gun, spawnPosition, Quaternion.identity, player);
 
             networkPlayerObject.GetComponent<WeaponController>().InitWeaponData(_weaponDatas[weaponNumber], networkGunObject);
-            networkPlayerObject.GetComponent<HealthSystem>().Init(_healthView);
+            networkPlayerObject.GetComponent<PlayerHealthSystem>().Init(_healthView);
             
             _spawnedCharacters.Add(player, networkPlayerObject);
             _spawnedWeapons.Add(player,networkGunObject);

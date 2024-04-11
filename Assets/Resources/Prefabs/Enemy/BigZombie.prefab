@@ -94,6 +94,8 @@ GameObject:
   - component: {fileID: 9103609756663144545}
   - component: {fileID: 6343432256869244115}
   - component: {fileID: 2146065101187976678}
+  - component: {fileID: 961210658060128321}
+  - component: {fileID: 130343841543131887}
   - component: {fileID: 5624838816249182348}
   - component: {fileID: 6241300357132839315}
   - component: {fileID: 6222219062318684442}
@@ -232,9 +234,36 @@ MonoBehaviour:
   - {fileID: 1851379008162929210}
   NetworkedBehaviours:
   - {fileID: 6343432256869244115}
+  - {fileID: 961210658060128321}
+  - {fileID: 130343841543131887}
   - {fileID: 6222219062318684442}
   - {fileID: 2887208438137643147}
   - {fileID: 3444963165098653930}
+--- !u!114 &961210658060128321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618867818636542633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f30f1882df642968f41cb84f7016aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &130343841543131887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618867818636542633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab3e9dd770a4c3ea0ffa3ca66b9a5e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 0
 --- !u!50 &5624838816249182348
 Rigidbody2D:
   serializedVersion: 4
@@ -326,6 +355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyData: {fileID: 11400000, guid: 49dbc794f9e281142a82c7607c47e96c, type: 2}
+  TimeToDespawn: 2
   _weaponAnimator: {fileID: 5830569426705832949}
 --- !u!1 &4645159499328784077
 GameObject:

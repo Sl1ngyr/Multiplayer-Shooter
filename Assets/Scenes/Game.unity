@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 118780977}
   - component: {fileID: 118780976}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16963,7 +16963,6 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -17045,46 +17044,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowDebugText: 0
-  m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
-  m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
-  m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
-    m_CustomCurve:
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
-  m_OutputCamera: {fileID: 519420031}
-  m_TargetOverride: {fileID: 0}
-  m_CameraCutEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_CallsDirty: 1
-  m_CameraActivatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_CallsDirty: 1
-  m_LastFrameUpdated: 10
-  mNextFrameId: 1
-  mActiveCameraPreviousFrameGameObject: {fileID: 0}
 --- !u!1 &654334752
 GameObject:
   m_ObjectHideFlags: 0
@@ -17145,73 +17104,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.15, y: 3.99, z: -0.014178323}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &706190593
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 706190596}
-  - component: {fileID: 706190595}
-  - component: {fileID: 706190594}
-  m_Layer: 0
-  m_Name: AmmunitionBox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &706190594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706190593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SortKey: 1567554369
-  ObjectInterest: 1
-  Flags: 262145
-  NestedObjects: []
-  NetworkedBehaviours:
-  - {fileID: 706190595}
---- !u!114 &706190595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706190593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncScale: 0
-  SyncParent: 0
-  _autoAOIOverride: 1
-  DisableSharedModeInterpolation: 0
---- !u!4 &706190596
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706190593}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1430385, y: -0.2027604, z: 0.14796484}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19430,6 +19322,7 @@ GameObject:
   - component: {fileID: 1369541958}
   - component: {fileID: 1369541957}
   - component: {fileID: 1369541956}
+  - component: {fileID: 1369541960}
   m_Layer: 5
   m_Name: Bar
   m_TagString: Untagged
@@ -19520,6 +19413,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1369541960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369541955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa2ecb5ef0ede742be8156838a52e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthText: {fileID: 118780976}
+  _text: 'HP '
 --- !u!1 &1539233277
 GameObject:
   m_ObjectHideFlags: 0
@@ -19850,6 +19757,7 @@ MonoBehaviour:
   - {fileID: -4243960104536501256, guid: 1d1187a1e50398841ab1e13a6ba50a81, type: 3}
   - {fileID: -4243960104536501256, guid: 305980656dfeb174797fd38e3019c42e, type: 3}
   _enemySpawner: {fileID: 654334754}
+  _healthView: {fileID: 1369541960}
 --- !u!4 &1876597392
 Transform:
   m_ObjectHideFlags: 0
@@ -20223,4 +20131,3 @@ SceneRoots:
   - {fileID: 1876597392}
   - {fileID: 654334755}
   - {fileID: 1369541959}
-  - {fileID: 706190596}

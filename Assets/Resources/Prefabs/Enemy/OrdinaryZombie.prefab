@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 8317676575755142782}
   - component: {fileID: 2197904583738767390}
   - component: {fileID: 8977908687067279827}
+  - component: {fileID: 326730016853877967}
+  - component: {fileID: 8846187879549451092}
   m_Layer: 0
   m_Name: OrdinaryZombie
   m_TagString: Untagged
@@ -153,6 +155,8 @@ MonoBehaviour:
   - {fileID: 4386594596858017300}
   - {fileID: 2197904583738767390}
   - {fileID: 8977908687067279827}
+  - {fileID: 326730016853877967}
+  - {fileID: 8846187879549451092}
   - {fileID: 1993000611569775766}
 --- !u!50 &281874136368518007
 Rigidbody2D:
@@ -245,7 +249,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyData: {fileID: 11400000, guid: f0d30b44fb09a1246ba4a631bbfb35d3, type: 2}
+  TimeToDespawn: 2
   _weaponAnimator: {fileID: 2980596625572071188}
+--- !u!114 &326730016853877967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3187059533169110113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f30f1882df642968f41cb84f7016aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8846187879549451092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3187059533169110113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab3e9dd770a4c3ea0ffa3ca66b9a5e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 0
 --- !u!1 &6709878914754838333
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +292,7 @@ GameObject:
   - component: {fileID: 2980596625572071188}
   - component: {fileID: 1239085218368828144}
   m_Layer: 6
-  m_Name: Weapon (1)
+  m_Name: 'Weapon '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
