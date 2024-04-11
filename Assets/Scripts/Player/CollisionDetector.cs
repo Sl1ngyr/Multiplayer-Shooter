@@ -9,24 +9,30 @@ namespace Player
     {
         public Action<int> OnPlayerTakeDamage;
 
-        private void OnTriggerEnter2D(Collider2D coll)
+        private void OnTriggerExit2D(Collider2D coll)
         {
             if (coll.TryGetComponent(out Bullet enemyBullet))
             {
                 if (enemyBullet.BulletOwner == BulletOwner.Enemy)
                 {
-                    OnPlayerTakeDamage?.Invoke(enemyBullet.Damage);
+                    RPC_EventTakeDamage(enemyBullet.Damage);
                 }
             }
             
             if (coll.transform.parent != null)
             {
-                if (coll.transform.parent.TryGetComponent(out BaseEnemyController enemyWeaponParent))
+                if (coll.transform.parent.TryGetComponent(out EnemyMelee enemyWeaponParent))
                 {
                     OnPlayerTakeDamage?.Invoke(enemyWeaponParent.EnemyDamage);
                 }
                 
             }
+        }
+
+        [Rpc]
+        private void RPC_EventTakeDamage(int damage)
+        {
+            OnPlayerTakeDamage?.Invoke(damage);
         }
         
     }

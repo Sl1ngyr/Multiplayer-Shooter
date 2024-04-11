@@ -36,9 +36,12 @@ namespace Player
         protected override void TakeDamage(int damage)
         {
             CurrentHealth -= damage;
-                
-            _healthView.UpdateHealthView(CurrentHealth, MaxHealth);
-                
+
+            if (Object.HasInputAuthority)
+            {
+                _healthView.UpdateHealthView(CurrentHealth, MaxHealth);
+            }
+
             if (CurrentHealth <= 0)
             {
                 _animationController.PlayerDeath();
