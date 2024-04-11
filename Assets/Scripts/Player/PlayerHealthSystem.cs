@@ -18,21 +18,27 @@ namespace Player
             _collisionDetector = GetComponent<CollisionDetector>();
 
             _collisionDetector.OnPlayerTakeDamage += TakeDamage;
-            
+
             if (Object.HasInputAuthority)
             {
-                _healthView = GameObject.FindAnyObjectByType<HealthView>();
-
+                _healthView = FindAnyObjectByType<HealthView>();
+           
                 _healthView.UpdateHealthView(CurrentHealth, MaxHealth);
             }
         }
-
+        
+        public void RestoreHealth()
+        {
+            CurrentHealth = MaxHealth;
+            _healthView.UpdateHealthView(CurrentHealth, MaxHealth);
+        }
+        
         protected override void TakeDamage(int damage)
         {
             CurrentHealth -= damage;
-
+                
             _healthView.UpdateHealthView(CurrentHealth, MaxHealth);
-            
+                
             if (CurrentHealth <= 0)
             {
                 _animationController.PlayerDeath();

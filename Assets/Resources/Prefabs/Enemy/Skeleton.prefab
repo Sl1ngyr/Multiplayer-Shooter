@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 22477015026726889}
   - component: {fileID: 8385796361716144613}
   - component: {fileID: 6624140805494904225}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 247
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -369,7 +369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7091933931622921033}
   - component: {fileID: 1644275779248235898}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

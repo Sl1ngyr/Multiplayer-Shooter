@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2319780089505603102}
   - component: {fileID: 2420416583588363771}
+  - component: {fileID: 5107682087944841924}
   - component: {fileID: 4413396193114378339}
   - component: {fileID: 5641420356107822523}
   m_Layer: 0
-  m_Name: FirstAidKit
+  m_Name: MedKit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,6 +52,19 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
+--- !u!114 &5107682087944841924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4548575254308676987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d233b92806564f409dbc383af7b10b82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _despawnTime: 15
 --- !u!114 &4413396193114378339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,6 +83,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 2420416583588363771}
+  - {fileID: 5107682087944841924}
 --- !u!58 &5641420356107822523
 CircleCollider2D:
   m_ObjectHideFlags: 0

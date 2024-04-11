@@ -50,6 +50,7 @@ namespace Player
             if (coll.TryGetComponent(out PlayerHealthSystem player))
             {
                 if(BulletOwner != BulletOwner.Enemy) return;
+
                 Runner.Despawn(Object);
             }
         }

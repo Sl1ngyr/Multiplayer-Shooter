@@ -1,7 +1,7 @@
-﻿using Fusion;
+﻿using System;
 using UnityEngine;
-using System;
 using Enemy;
+using Fusion;
 
 namespace Player
 {
@@ -18,11 +18,17 @@ namespace Player
                     OnPlayerTakeDamage?.Invoke(enemyBullet.Damage);
                 }
             }
-
-            /*if (coll.transform.parent.TryGetComponent(out EnemyMelee enemyWeaponParent))
+            
+            if (coll.transform.parent != null)
             {
-                OnPlayerTakeDamage?.Invoke(enemyWeaponParent.EnemyDamage);
-            }*/
+                if (coll.transform.parent.TryGetComponent(out BaseEnemyController enemyWeaponParent))
+                {
+                    OnPlayerTakeDamage?.Invoke(enemyWeaponParent.EnemyDamage);
+                }
+                
+            }
         }
+        
     }
+    
 }

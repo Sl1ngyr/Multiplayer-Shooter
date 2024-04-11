@@ -95,7 +95,10 @@ GameObject:
   - component: {fileID: 2647690325593333585}
   - component: {fileID: 8562456848857819505}
   - component: {fileID: 3984654155844981880}
+  - component: {fileID: 4229010913604987668}
   - component: {fileID: 4539374763103806340}
+  - component: {fileID: 4535592019611521724}
+  - component: {fileID: 3125598951114779286}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -153,6 +156,22 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 8562456848857819505}
+  - {fileID: 4229010913604987668}
+  - {fileID: 3125598951114779286}
+--- !u!114 &4229010913604987668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6094152196784570376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a3bf488a6e44d1aa4484fc249160f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _despawnTime: 20
+  _timeToDetonate: 1
 --- !u!58 &4539374763103806340
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -168,7 +187,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 191
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -188,3 +207,42 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2
+--- !u!95 &4535592019611521724
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6094152196784570376}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 043136ce22d717b4eac614e49988c7cd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3125598951114779286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6094152196784570376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 4535592019611521724}
+  TotalWords: 1
+  ApplyTiming: 2
+  SyncSettings: 79
+  StateHashes: 000000002b1a167c79406955bfe366f35420ee0e
+  TriggerHashes: 00000000005b9a11

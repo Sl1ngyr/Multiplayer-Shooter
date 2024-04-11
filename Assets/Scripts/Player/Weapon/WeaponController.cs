@@ -14,7 +14,7 @@ namespace Player.Weapon
         private WeaponData _weaponData;
         private int _numberOfBullets;
         private int _maxBullets;
-        
+
         public void InitWeaponData(WeaponData weaponData, NetworkObject gun)
         {
             _currentWeapon = gun.GetComponent<Gun>();
@@ -50,6 +50,11 @@ namespace Player.Weapon
             }
         }
 
+        public void RestoreAllBullets()
+        {
+            _numberOfBullets = _maxBullets;
+        }
+        
         [Rpc]
         private void RPC_SetWeapon()
         {

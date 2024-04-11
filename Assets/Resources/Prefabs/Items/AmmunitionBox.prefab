@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1674042770708217479}
   - component: {fileID: 1130379548492759099}
+  - component: {fileID: 4212050405224803700}
   - component: {fileID: 1556087443923467003}
   - component: {fileID: 6200966702921537150}
   m_Layer: 0
@@ -135,6 +136,19 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
+--- !u!114 &4212050405224803700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7716166537292784942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d731c37ac19446eb0e5e471a80a05bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _despawnTime: 15
 --- !u!114 &1556087443923467003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +167,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 1130379548492759099}
+  - {fileID: 4212050405224803700}
 --- !u!58 &6200966702921537150
 CircleCollider2D:
   m_ObjectHideFlags: 0

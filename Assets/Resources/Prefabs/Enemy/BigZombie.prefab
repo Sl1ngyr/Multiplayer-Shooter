@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2494998171846274393}
   - component: {fileID: 4978208213681398247}
   - component: {fileID: 3444963165098653930}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: AttackDistanceController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 247
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

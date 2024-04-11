@@ -1,7 +1,9 @@
 ﻿using System;
 using Fusion;
+using Items;
 using Player;
 using UnityEngine;
+
 namespace Enemy
 {
     public class EnemyCollisionDetector : NetworkBehaviour
@@ -9,18 +11,30 @@ namespace Enemy
         public Action<int> OnEnemyTakeDamage;
         public Action OnEnemyActionsWhenTakeDamage;
         
-        private void OnTriggerExit2D(Collider2D coll)
+        private void OnTriggerEnter2D(Collider2D coll)
         {
+            
             if (coll.TryGetComponent(out Bullet enemyBullet))
             {
-                Bullet bullet = enemyBullet;
-                if (bullet.BulletOwner == BulletOwner.Player)
+                if (enemyBullet.BulletOwner == BulletOwner.Player)
                 {
-                    OnEnemyTakeDamage?.Invoke(bullet.Damage);
+                    OnEnemyTakeDamage?.Invoke(enemyBullet.Damage);
                     OnEnemyActionsWhenTakeDamage?.Invoke();
                 }
             }
-            
         }
+        
+        private void OnTriggerStay2D(Collider2D coll)
+        {
+            
+            if (coll.TryGetComponent(out BombItem bomb))
+            {
+                if (bomb.IsBombDetonate)
+                {
+                    Runner.Despawn(Object);
+                }
+            }
+        }
+        
     }
 }

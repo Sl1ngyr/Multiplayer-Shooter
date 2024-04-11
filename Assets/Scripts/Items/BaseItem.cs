@@ -5,9 +5,9 @@ namespace Items
 {
     public class BaseItem : NetworkBehaviour
     {
-        [SerializeField] private float _despawnTime;
+        [SerializeField] protected float _despawnTime;
         
-        [Networked] private TickTimer TimerToDespawn { get; set; }
+        [Networked] protected TickTimer TimerToDespawn { get; set; }
         
         public override void Spawned()
         {
@@ -17,7 +17,9 @@ namespace Items
         public override void FixedUpdateNetwork()
         {
             if (TimerToDespawn.Expired(Runner))
+            {
                 Runner.Despawn(Object);
+            }
         }
     }
 }
