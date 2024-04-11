@@ -25,6 +25,7 @@ namespace Enemy
 
         public int EnemyDamage => EnemyData.Damage;
         public int EnemyHP => EnemyData.HP;
+        public Transform GetTargetTransform => TargetToFollow;
         
         public bool ReachTarget
         {
@@ -48,6 +49,8 @@ namespace Enemy
 
             CollisionDetector.OnEnemyActionsWhenTakeDamage += TakeDamageAnimation;
             EnemyHealthSystem.OnEnemyDeath += ActionsBeforeDie;
+            
+            AttackDelay = TickTimer.CreateFromSeconds(Runner, EnemyData.AttackDelay);
         }
 
         public override void FixedUpdateNetwork()
