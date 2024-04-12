@@ -16,10 +16,11 @@ namespace Wave
         [Networked] private TickTimer _spawnEnemy { get; set; }
         [Networked] private TickTimer _spawnItems { get; set; }
         
+        
         [SerializeField] private EnemySpawner _enemySpawner;
         
         private int _currentWave = 0;
-        private bool _isRunning = false;
+        private bool _isRunning = true;
 
         public bool IsWaveLaunch => _isRunning;
 

@@ -1,4 +1,5 @@
-﻿using Services;
+﻿using Fusion;
+using Services;
 using UI;
 using UnityEngine;
 
@@ -8,9 +9,16 @@ namespace Player
     {
         [SerializeField] private AnimationController _animationController;
         
+        [Networked] private NetworkObject _networkHealthView { get; set; }
+
         private HealthView _healthView;
         private CollisionDetector _collisionDetector;
-
+        
+        public void Init(NetworkObject networkObject)
+        {
+            _networkHealthView = networkObject;
+        }
+        
         public override void Spawned()
         {
             CurrentHealth = MaxHealth;
@@ -21,8 +29,8 @@ namespace Player
 
             if (Object.HasInputAuthority)
             {
-                _healthView = FindAnyObjectByType<HealthView>(FindObjectsInactive.Include); 
-                _healthView.gameObject.SetActive(true);
+                _healthView = _networkHealthView.GetComponent<HealthView>();
+                
                 _healthView.UpdateHealthView(CurrentHealth, MaxHealth);
             }
         }

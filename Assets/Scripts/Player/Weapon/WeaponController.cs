@@ -86,6 +86,7 @@ namespace Player.Weapon
         public void RestoreAllBullets()
         {
             _numberOfBullets = _maxBullets;
+            RPC_SetBulletView(_numberOfBullets, _maxBullets);
         }
 
         [Rpc]
