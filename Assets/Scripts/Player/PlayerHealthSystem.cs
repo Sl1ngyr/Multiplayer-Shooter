@@ -21,8 +21,8 @@ namespace Player
 
             if (Object.HasInputAuthority)
             {
-                _healthView = FindAnyObjectByType<HealthView>();
-           
+                _healthView = FindAnyObjectByType<HealthView>(FindObjectsInactive.Include); 
+                _healthView.gameObject.SetActive(true);
                 _healthView.UpdateHealthView(CurrentHealth, MaxHealth);
             }
         }

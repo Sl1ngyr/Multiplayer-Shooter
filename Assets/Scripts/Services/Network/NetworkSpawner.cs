@@ -2,7 +2,6 @@
 using Fusion;
 using UI;
 using UnityEngine;
-using Enemy;
 using Player.Weapon;
 
 namespace Services.Network
@@ -13,7 +12,6 @@ namespace Services.Network
         [SerializeField] private List<WeaponData> _weaponDatas;
         [SerializeField] private NetworkRunner _networkRunner;
         [SerializeField] private List<NetworkObject> _playerGuns;
-        [SerializeField] private EnemySpawner _enemySpawner;
 
         private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
         private Dictionary<PlayerRef, NetworkObject> _spawnedWeapons = new Dictionary<PlayerRef, NetworkObject>();
@@ -28,8 +26,6 @@ namespace Services.Network
             {
                 RPC_SetSkinName();
                 SpawnPlayer(player);
-                
-                _enemySpawner.SpawnEnemy();
             }
         }
 
@@ -54,9 +50,7 @@ namespace Services.Network
             
             NetworkObject gun = _playerGuns[weaponNumber];
             _playerGuns.RemoveAt(weaponNumber);
-            
-            Vector2 spawnPosition = Vector2.zero;
-            
+
             NetworkObject skinPlayer = new NetworkObject();
             
             foreach (var prefab in _playerPrefab)
@@ -67,10 +61,12 @@ namespace Services.Network
                 }
             }
             
+            Vector3 spawnPosition = new Vector3((player.RawEncoded % _networkRunner.Config.Simulation.PlayerCount) * 3, 1, 0);
+            
             NetworkObject networkPlayerObject = _networkRunner.Spawn(skinPlayer, spawnPosition, Quaternion.identity, player);
             NetworkObject networkGunObject = _networkRunner.Spawn(gun, spawnPosition, Quaternion.identity, player);
 
-            networkPlayerObject.GetComponent<WeaponController>().InitWeaponData(_weaponDatas[weaponNumber], networkGunObject);
+            networkPlayerObject.GetComponent<WeaponController>().Init(_weaponDatas[weaponNumber], networkGunObject);
 
             _spawnedCharacters.Add(player, networkPlayerObject);
             _spawnedWeapons.Add(player,networkGunObject);

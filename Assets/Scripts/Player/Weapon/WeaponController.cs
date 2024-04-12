@@ -15,7 +15,7 @@ namespace Player.Weapon
         private int _numberOfBullets;
         private int _maxBullets;
 
-        public void InitWeaponData(WeaponData weaponData, NetworkObject gun)
+        public void Init(WeaponData weaponData, NetworkObject gun)
         {
             _currentWeapon = gun.GetComponent<Gun>();
             _weaponData = weaponData;
@@ -23,6 +23,8 @@ namespace Player.Weapon
             _maxBullets = _weaponData.NumberOfBullets;
             _numberOfBullets = _maxBullets;
 
+            _shootDelay = TickTimer.CreateFromSeconds(Runner, _weaponData.ShootDelay);
+            
             RPC_SetWeapon();
         }
 

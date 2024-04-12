@@ -1,26 +1,33 @@
-﻿using Fusion;
-using Services.Network;
+﻿using System.Collections.Generic;
+using Fusion;
 using UnityEngine;
 
 namespace Enemy
 {
     public class EnemySpawner : NetworkBehaviour
     {
-        [SerializeField] private EnemyRange _enemyRange;
-        [SerializeField] private NetworkSpawner _networkSpawner;
-        
-        public void SpawnEnemy()
+        private List<NetworkObject> _enemies = new List<NetworkObject>();
+
+        public void SpawnEnemy(Transform target, BaseEnemyController enemy, Vector2 position)
         {
-            Transform targetPos = new RectTransform();
-            foreach (var target in _networkSpawner.Players)
+            NetworkObject enemyObject = Runner.Spawn(enemy.gameObject, position, Quaternion.identity, null, ((runner, o) =>
             {
-                targetPos = target.Value.transform;
+                o.GetComponent<BaseEnemyController>().Init(target);
+            }));
+            
+            _enemies.Add(enemyObject);
+        }
+        
+        public void DestroyAllEnemies()
+        {
+            foreach (var enemy in _enemies)
+            {
+                if(enemy == null) continue;
+                
+                Runner.Despawn(enemy);
             }
             
-            Runner.Spawn(_enemyRange, transform.position, transform.rotation, Object.InputAuthority, ((runner, o) =>
-            {
-                o.GetComponent<EnemyRange>().Init(targetPos);
-            }));
+            _enemies.Clear();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Player
             {
                 if (coll.transform.parent.TryGetComponent(out EnemyMelee enemyWeaponParent))
                 {
-                    OnPlayerTakeDamage?.Invoke(enemyWeaponParent.EnemyDamage);
+                    RPC_EventTakeDamage(enemyWeaponParent.EnemyDamage);
                 }
                 
             }
