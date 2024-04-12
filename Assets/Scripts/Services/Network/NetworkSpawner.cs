@@ -12,7 +12,8 @@ namespace Services.Network
         [SerializeField] private List<WeaponData> _weaponDatas;
         [SerializeField] private NetworkRunner _networkRunner;
         [SerializeField] private List<NetworkObject> _playerGuns;
-
+        [SerializeField] private NetworkObject _bulletsView;
+        
         private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
         private Dictionary<PlayerRef, NetworkObject> _spawnedWeapons = new Dictionary<PlayerRef, NetworkObject>();
         
@@ -46,11 +47,10 @@ namespace Services.Network
         
         private void SpawnPlayer(PlayerRef player)
         {
-            int weaponNumber = Random.Range(0, _weaponDatas.Count - 1);
+            int weaponNumber = Random.Range(0, _playerGuns.Count - 1);
             
             NetworkObject gun = _playerGuns[weaponNumber];
-            _playerGuns.RemoveAt(weaponNumber);
-
+            
             NetworkObject skinPlayer = new NetworkObject();
             
             foreach (var prefab in _playerPrefab)
@@ -63,11 +63,17 @@ namespace Services.Network
             
             Vector3 spawnPosition = new Vector3((player.RawEncoded % _networkRunner.Config.Simulation.PlayerCount) * 3, 1, 0);
             
-            NetworkObject networkPlayerObject = _networkRunner.Spawn(skinPlayer, spawnPosition, Quaternion.identity, player);
             NetworkObject networkGunObject = _networkRunner.Spawn(gun, spawnPosition, Quaternion.identity, player);
+            
+            NetworkObject networkPlayerObject = _networkRunner.Spawn(skinPlayer, spawnPosition, Quaternion.identity, player, ((runner, o) =>
+            {
+                o.GetComponent<WeaponController>().Init(_weaponDatas[weaponNumber], networkGunObject, _bulletsView);
+            }));
+            
+            //networkPlayerObject.GetComponent<WeaponController>().Init(_weaponDatas[weaponNumber], networkGunObject, _bulletsView);
 
-            networkPlayerObject.GetComponent<WeaponController>().Init(_weaponDatas[weaponNumber], networkGunObject);
-
+            _playerGuns.RemoveAt(weaponNumber);
+            _weaponDatas.RemoveAt(weaponNumber);
             _spawnedCharacters.Add(player, networkPlayerObject);
             _spawnedWeapons.Add(player,networkGunObject);
         }

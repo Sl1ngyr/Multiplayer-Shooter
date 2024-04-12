@@ -68149,6 +68149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 935254102}
   - component: {fileID: 935254103}
+  - component: {fileID: 935254104}
   m_Layer: 5
   m_Name: BulletBar
   m_TagString: Untagged
@@ -68190,6 +68191,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthText: {fileID: 1899616857386623618}
   _text: 'Bullets '
+--- !u!114 &935254104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935254101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 1314315372
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours: []
 --- !u!1 &944921081
 GameObject:
   m_ObjectHideFlags: 0
@@ -68852,6 +68870,7 @@ MonoBehaviour:
   - {fileID: -4243960104536501256, guid: 6cf19837c5674564d9798b8ec005b9a7, type: 3}
   - {fileID: -4243960104536501256, guid: 1d1187a1e50398841ab1e13a6ba50a81, type: 3}
   - {fileID: -4243960104536501256, guid: 305980656dfeb174797fd38e3019c42e, type: 3}
+  _bulletsView: {fileID: 935254104}
 --- !u!4 &1876597392
 Transform:
   m_ObjectHideFlags: 0
