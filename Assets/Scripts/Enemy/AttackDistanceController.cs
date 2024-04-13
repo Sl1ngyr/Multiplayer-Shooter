@@ -10,7 +10,7 @@ namespace Enemy
 
         public void OnTriggerStay2D(Collider2D coll)
         {
-            if(!CheckColliderIsOurTarget(coll.transform)) return;
+            SetNewTarget(coll.transform);
             
             if (coll.transform.TryGetComponent(out MotionHandler player))
             {
@@ -20,18 +20,15 @@ namespace Enemy
 
         public void OnTriggerExit2D(Collider2D coll)
         {
-            if(!CheckColliderIsOurTarget(coll.transform)) return;
-            
             if (coll.transform.TryGetComponent(out MotionHandler player))
             {
                 _enemyController.ReachTarget = false;
             }
         }
 
-        private bool CheckColliderIsOurTarget(Transform transform)
+        private void SetNewTarget(Transform transform)
         {
-            if (_enemyController.GetTargetTransform != transform) return false;
-            else return true;
+            _enemyController.TargetTransform = transform;
         }
         
     }

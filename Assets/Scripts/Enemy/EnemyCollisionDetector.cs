@@ -2,6 +2,7 @@
 using Fusion;
 using Items;
 using Player;
+using Services;
 using UnityEngine;
 
 namespace Enemy

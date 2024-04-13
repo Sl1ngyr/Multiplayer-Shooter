@@ -1,4 +1,5 @@
-﻿using Fusion;
+﻿using CameraComponents;
+using Fusion;
 using Services.Network;
 using UnityEngine;
 
@@ -13,6 +14,13 @@ namespace Player
         public override void Spawned()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
+            
+            if (Object.HasInputAuthority)
+            {
+                Camera camera = Camera.main;
+                
+                camera.GetComponent<FollowCamera>().CameraAnchorPoint = transform;
+            }
         }
 
         public override void FixedUpdateNetwork()

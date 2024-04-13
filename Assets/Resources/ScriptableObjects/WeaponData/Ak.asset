@@ -17,4 +17,4 @@ MonoBehaviour:
   _damage: 10
   _shootDelay: 0.2
   _shotType: 0
-  _numberOfBullets: 60
+  _numberOfBullets: 120

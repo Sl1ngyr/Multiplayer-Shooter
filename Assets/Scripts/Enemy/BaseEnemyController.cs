@@ -25,7 +25,12 @@ namespace Enemy
 
         public int EnemyDamage => EnemyData.Damage;
         public int EnemyHP => EnemyData.HP;
-        public Transform GetTargetTransform => TargetToFollow;
+
+        public Transform TargetTransform
+        {
+            get => TargetToFollow;
+            set => TargetToFollow = value;
+        }
         
         public bool ReachTarget
         {
@@ -55,13 +60,12 @@ namespace Enemy
 
         public override void FixedUpdateNetwork()
         {
+            RPC_ChangeScale(TargetToFollow.transform.position.x);
             FollowToTarget();
         }
         
         protected void FollowToTarget()
         {
-            RPC_ChangeScale(TargetToFollow.transform.position.x);
-            
             if (!IsReachTarget && !IsEnemyDeath)
             {
                 Vector3 direction = (TargetToFollow.transform.position - gameObject.transform.position).normalized;

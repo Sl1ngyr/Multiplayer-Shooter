@@ -6,7 +6,7 @@ namespace UI
     public class BulletsView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _healthText;
-        [SerializeField] private string _text = "Bullets ";
+        [SerializeField] private string _text = "Ammo ";
         
         public void UpdateBulletsView(int currentBullets, int maxBullets)
         {

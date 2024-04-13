@@ -41,7 +41,7 @@ namespace Wave
             }
             else if (_breakTime == 0 && _isStartWave)
             {
-                if (_waveTime < 0)
+                if (_waveTime == 0)
                 {
                     EndWave?.Invoke();
                     _isStartWave = false;

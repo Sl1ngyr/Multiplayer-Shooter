@@ -1,8 +1,9 @@
 ﻿using Enemy;
 using Fusion;
+using Player;
 using UnityEngine;
 
-namespace Player
+namespace Services
 {
     public enum BulletOwner
     {
@@ -43,15 +44,22 @@ namespace Player
             if (coll.TryGetComponent(out BaseEnemyController enemy))
             {
                 if(BulletOwner != BulletOwner.Player) return;
-                
-                Runner.Despawn(Object);
+                else if (Object != null)
+                {
+                    Runner.Despawn(Object);
+                }
+
             }
 
             if (coll.TryGetComponent(out PlayerHealthSystem player))
             {
                 if(BulletOwner != BulletOwner.Enemy) return;
-
-                Runner.Despawn(Object);
+                
+                else if(Object != null)
+                {
+                    Runner.Despawn(Object);
+                }
+                
             }
         }
     }

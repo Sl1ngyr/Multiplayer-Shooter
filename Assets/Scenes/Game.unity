@@ -64287,6 +64287,37 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &356963085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 356963086}
+  m_Layer: 0
+  m_Name: === Zenject ===
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &356963086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356963085}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.8553624, y: 7.327117, z: 0.87192935}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &392668660
 GameObject:
   m_ObjectHideFlags: 0
@@ -64398,6 +64429,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -64479,6 +64511,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae9b1223d34c443d84ac65fba5e4416c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &520840155
 GameObject:
   m_ObjectHideFlags: 0
@@ -68139,7 +68183,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b2dfb8219695c1842b2592662e625e6f, type: 2}
   - {fileID: 11400000, guid: 758eabb723778864aa94a8b9d28db257, type: 2}
   _networkSpawner: {fileID: 1876597391}
-  _spawnPosition: {x: 30, y: 30}
+  _spawnPosition: {x: 10, y: 10}
   timerWaveController: {fileID: 1573116917}
   _enemySpawner: {fileID: 1999181066}
 --- !u!4 &841572562
@@ -68418,6 +68462,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.7305498, y: -1.7654815, z: -0.09631239}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1528657344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1528657345}
+  m_Layer: 0
+  m_Name: === Network ===
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1528657345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528657344}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.8553624, y: 7.327117, z: 0.87192935}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -69115,7 +69190,7 @@ GameObject:
   - component: {fileID: 358724557414352840}
   - component: {fileID: 8386249650672688028}
   m_Layer: 5
-  m_Name: Bar
+  m_Name: PlayerSystem
   m_TagString: PlayerSystem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69823,14 +69898,16 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 1619168009}
   - {fileID: 1539233279}
+  - {fileID: 356963086}
+  - {fileID: 1692587616}
+  - {fileID: 1528657345}
+  - {fileID: 1735026279}
+  - {fileID: 1876597392}
+  - {fileID: 654334755}
+  - {fileID: 1999181067}
   - {fileID: 392668661}
   - {fileID: 944921082}
   - {fileID: 1566496437}
-  - {fileID: 1735026279}
-  - {fileID: 1692587616}
-  - {fileID: 1876597392}
-  - {fileID: 654334755}
   - {fileID: 5204131019410647987}
   - {fileID: 841572562}
   - {fileID: 1573116921}
-  - {fileID: 1999181067}

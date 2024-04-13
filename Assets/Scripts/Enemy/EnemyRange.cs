@@ -1,6 +1,7 @@
 ﻿using Enemy.AnimationStates;
 using Fusion;
 using Player;
+using Services;
 using UnityEngine;
 
 namespace Enemy

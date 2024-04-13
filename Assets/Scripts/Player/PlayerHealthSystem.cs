@@ -38,7 +38,11 @@ namespace Player
         public void RestoreHealth()
         {
             CurrentHealth = MaxHealth;
-            _healthView.UpdateHealthView(CurrentHealth, MaxHealth);
+            
+            if (Object.HasInputAuthority)
+            {
+                _healthView.UpdateHealthView(CurrentHealth, MaxHealth);
+            }
         }
         
         protected override void TakeDamage(int damage)

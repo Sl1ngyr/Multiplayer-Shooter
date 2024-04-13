@@ -20,5 +20,5 @@ MonoBehaviour:
   _items:
   - {fileID: 4212050405224803700, guid: 6c4dfc58e5b8c4c42908f852bf26fa24, type: 3}
   - {fileID: 5107682087944841924, guid: 1983d8ca1391ffa44bcae98eb73d584c, type: 3}
-  _delayToSpawnEnemy: 2
+  _delayToSpawnEnemy: 4
   _delayToSpawnItems: 10
