@@ -16,8 +16,11 @@ namespace Player.Weapon
         private Gun _currentWeapon;
         private BulletsView _bulletsView;
         private WeaponData _weaponData;
+        private PlayerHealthSystem _healthSystem;
+        
         private int _maxBullets;
         private int _numberOfBullets;
+        private bool _isPlayerAlive = true;
         
         public void Init(WeaponData weaponData, NetworkObject gun, NetworkObject bulletsView)
         {
@@ -41,23 +44,18 @@ namespace Player.Weapon
             if (Object.HasInputAuthority)
             {
                 _bulletsView = _networkedBulletsView.GetComponent<BulletsView>();
-                
+                _bulletsView.gameObject.SetActive(true);
                 _bulletsView.UpdateBulletsView(_networkedMaxBullets,_networkedMaxBullets);
             }
-        }
 
-        [Rpc]
-        private void RPC_SetBulletView(int currentBullets, int maxBullets)
-        {
-            if (Object.HasInputAuthority)
-            {
-                _bulletsView.UpdateBulletsView(currentBullets,maxBullets);
-            }
-            
+            _healthSystem = GetComponent<PlayerHealthSystem>();
+            _healthSystem.OnPlayerDead += DeactivateComponents;
         }
         
         public override void FixedUpdateNetwork()
         {
+            if(!_isPlayerAlive) return;
+            
             var input = GetInput(out NetworkInputData data);
             
             if (HasStateAuthority && _shootDelay.ExpiredOrNotRunning(Runner))
@@ -89,11 +87,44 @@ namespace Player.Weapon
             RPC_SetBulletView(_numberOfBullets, _maxBullets);
         }
 
+        private void DeactivateComponents()
+        {
+            Runner.Despawn(_currentWeapon.Object);
+
+            RPC_ManagementStatusBulletView(false);
+
+            _isPlayerAlive = false;
+        }
+        
+        [Rpc]
+        private void RPC_SetBulletView(int currentBullets, int maxBullets)
+        {
+            if (Object.HasInputAuthority)
+            {
+                _bulletsView.UpdateBulletsView(currentBullets,maxBullets);
+            }
+            
+        }
+        
+        [Rpc]
+        private void RPC_ManagementStatusBulletView(bool status)
+        {
+            if (Object.HasInputAuthority)
+            {
+                _bulletsView.gameObject.SetActive(status);
+            }
+        }
+        
         [Rpc]
         private void RPC_SetWeapon()
         {
             _currentWeapon.transform.position = _spawnPoint.transform.position;
             _currentWeapon.transform.parent = _spawnPoint.transform;
+        }
+
+        private void OnDisable()
+        {
+            _healthSystem.OnPlayerDead -= DeactivateComponents;
         }
     }
 }

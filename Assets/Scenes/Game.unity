@@ -64366,7 +64366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &463932245
 RectTransform:
   m_ObjectHideFlags: 0
@@ -68185,7 +68185,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 758eabb723778864aa94a8b9d28db257, type: 2}
   _networkSpawner: {fileID: 1876597391}
   _spawnPosition: {x: 10, y: 10}
-  timerWaveController: {fileID: 1573116917}
+  _timerWaveController: {fileID: 1573116917}
   _enemySpawner: {fileID: 1999181066}
 --- !u!4 &841572562
 Transform:
@@ -68282,7 +68282,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &935254102
 RectTransform:
   m_ObjectHideFlags: 0
@@ -69030,6 +69030,7 @@ MonoBehaviour:
   _bulletsView: {fileID: 935254104}
   _healthView: {fileID: 463932247}
   _statisticsPlayers: {fileID: 891187810}
+  _waveController: {fileID: 841572561}
 --- !u!4 &1876597392
 Transform:
   m_ObjectHideFlags: 0

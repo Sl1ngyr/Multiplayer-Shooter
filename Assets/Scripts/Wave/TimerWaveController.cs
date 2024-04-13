@@ -30,26 +30,30 @@ namespace Wave
         {
             if(!_waveController.IsWaveLaunch) return;
 
-            if (_breakTime > 0)
-            {
+            WaveTimeProcessing();
+        }
 
-                RPC_CalculateTime(_breakTime);
-            }
-            else if (_breakTime == 0 && !_isStartWave)
+        private void WaveTimeProcessing()
+        {
+            if (_breakTime == 0)
             {
                 _isStartWave = true;
             }
-            else if (_breakTime == 0 && _isStartWave)
+            else
             {
-                if (_waveTime == 0)
-                {
-                    EndWave?.Invoke();
-                    _isStartWave = false;
-                }
-                else
-                {
-                    RPC_CalculateTime(_waveTime);
-                }
+                RPC_CalculateTime(_breakTime);
+            }
+            
+            if(!_isStartWave) return;
+            
+            if (_waveTime == 0)
+            {
+                EndWave?.Invoke();
+                _isStartWave = false;
+            }
+            else
+            {
+                RPC_CalculateTime(_waveTime);
             }
         }
         

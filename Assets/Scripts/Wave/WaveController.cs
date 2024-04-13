@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Enemy;
 using Fusion;
+using Player;
 using Services.Network;
 using UnityEngine;
 
@@ -11,23 +12,37 @@ namespace Wave
         [SerializeField] private List<WaveData> _waveDatas;
         [SerializeField] private NetworkSpawner _networkSpawner;
         [SerializeField] private Vector2 _spawnPosition;
-        [SerializeField] private TimerWaveController timerWaveController;
+        [SerializeField] private TimerWaveController _timerWaveController;
         
         [Networked] private TickTimer _spawnEnemy { get; set; }
         [Networked] private TickTimer _spawnItems { get; set; }
         
-        
         [SerializeField] private EnemySpawner _enemySpawner;
         
         private int _currentWave = 0;
-        private bool _isRunning = true;
-
+        private int _numberOfLivePlayers;
+        private int _maxWave;
+        private bool _isRunning = false;
+        
+        private List<Transform> _playerTransforms = new List<Transform>();
+        
         public bool IsWaveLaunch => _isRunning;
 
+        public void Init(Transform transformPlayer, int numberOfPlayers)
+        {
+            _numberOfLivePlayers = numberOfPlayers;
+            
+            _playerTransforms.Add(transformPlayer);
+
+            transformPlayer.GetComponent<PlayerHealthSystem>().OnPlayerLoseLifeEvent += RemovePlayerTransform;
+        }
+        
         public override void Spawned()
         {
-            timerWaveController.EndWave += ChangeWave;
-            timerWaveController.Init(_waveDatas[_currentWave].Break, _waveDatas[_currentWave].Duration);
+            _timerWaveController.EndWave += ChangeWave;
+            _timerWaveController.Init(_waveDatas[_currentWave].Break, _waveDatas[_currentWave].Duration);
+
+            _maxWave = _waveDatas.Count;
             
             _spawnEnemy = TickTimer.CreateFromSeconds(Runner, _waveDatas[_currentWave].DelayToSpawnEnemy);
             _spawnItems = TickTimer.CreateFromSeconds(Runner, _waveDatas[_currentWave].DelayToSpawnItems);
@@ -44,7 +59,7 @@ namespace Wave
                 }
             }
             
-            if(!timerWaveController.IsStartWave) return;
+            if(!_timerWaveController.IsStartWave || !_isRunning) return;
 
             if (_spawnEnemy.ExpiredOrNotRunning(Runner))
             {
@@ -53,20 +68,42 @@ namespace Wave
             }
         }
 
+        public void StartWave()
+        {
+            _isRunning = true;
+            
+        }
+        
+        private void RemovePlayerTransform(Transform transform)
+        {
+            _numberOfLivePlayers--;
+
+            if (_numberOfLivePlayers == 0)
+            {
+                transform.GetComponent<PlayerHealthSystem>().OnPlayerLoseLifeEvent -= RemovePlayerTransform;
+                
+                DeactivateWave();
+                return;
+            }
+            
+            foreach (var playerTransform in _playerTransforms)
+            {
+                if (playerTransform == transform)
+                {
+                    playerTransform.GetComponent<PlayerHealthSystem>().OnPlayerLoseLifeEvent -= RemovePlayerTransform;
+                    
+                    _playerTransforms.Remove(playerTransform);
+                    
+                    return;
+                }
+            }
+        }
+        
         private void SpawnRandomEnemy()
         {
             var randomEnemyNumber = Random.Range(0, _waveDatas[_currentWave].Enemies.Count - 1);
-            
-            List<Transform> playerTransforms = new List<Transform>();
-            
-            foreach (var playerTranform in _networkSpawner.Players)
-            {
-                playerTransforms.Add(playerTranform.Value.transform);
-            }
 
-            var randomTarget = Random.Range(0, playerTransforms.Count - 1);
-
-            _enemySpawner.SpawnEnemy(playerTransforms[randomTarget], _waveDatas[_currentWave].Enemies[randomEnemyNumber], GetRandomPositionForSpawn());
+            _enemySpawner.SpawnEnemy(_playerTransforms, _waveDatas[_currentWave].Enemies[randomEnemyNumber], GetRandomPositionForSpawn());
         }
 
         private void SpawnRandomItems()
@@ -87,7 +124,14 @@ namespace Wave
         private void ChangeWave()
         {
             _currentWave++;
-            timerWaveController.Init(_waveDatas[_currentWave].Break, _waveDatas[_currentWave].Duration);
+
+            if (_currentWave == _maxWave)
+            {
+                DeactivateWave();
+                return;
+            }
+                
+            _timerWaveController.Init(_waveDatas[_currentWave].Break, _waveDatas[_currentWave].Duration);
             
             _enemySpawner.DestroyAllEnemies();
 
@@ -95,9 +139,17 @@ namespace Wave
             _spawnItems = TickTimer.CreateFromSeconds(Runner, _waveDatas[_currentWave].DelayToSpawnItems);
         }
         
+        
+        private void DeactivateWave()
+        {
+            _isRunning = false;
+
+            _enemySpawner.DestroyAllEnemies();
+        }
+        
         private void OnDisable()
         { 
-            timerWaveController.EndWave -= ChangeWave;
+            _timerWaveController.EndWave -= ChangeWave;
         }
         
     }

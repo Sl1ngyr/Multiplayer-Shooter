@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Fusion;
-using UnityEngine;
 
 namespace Services
 {
@@ -20,13 +19,11 @@ namespace Services
         public void AddPlayerDamageToData(int id, int damage)
         {
             _playersDamage[id] += damage;
-            Debug.Log(_playersDamage[id].ToString()+ " Damage " + id.ToString());
         }
         
         public void AddPlayerKillsToData(int id)
         {
             _playersKills[id] += 1;
-            Debug.Log(_playersKills[id].ToString()+ " KILLS "+ id.ToString());
         }
         
         

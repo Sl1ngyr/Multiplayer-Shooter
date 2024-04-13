@@ -2,6 +2,7 @@
 using Services;
 using UI;
 using UnityEngine;
+using System;
 
 namespace Player
 {
@@ -13,6 +14,9 @@ namespace Player
 
         private HealthView _healthView;
         private CollisionDetector _collisionDetector;
+
+        public Action OnPlayerDead;
+        public Action<Transform> OnPlayerLoseLifeEvent;
         
         public void Init(NetworkObject networkObject)
         {
@@ -30,7 +34,7 @@ namespace Player
             if (Object.HasInputAuthority)
             {
                 _healthView = _networkHealthView.GetComponent<HealthView>();
-                
+                _healthView.gameObject.SetActive(true);
                 _healthView.UpdateHealthView(CurrentHealth, MaxHealth);
             }
         }
@@ -39,25 +43,41 @@ namespace Player
         {
             CurrentHealth = MaxHealth;
             
-            if (Object.HasInputAuthority)
-            {
-                _healthView.UpdateHealthView(CurrentHealth, MaxHealth);
-            }
+            RPC_SetHealthView(CurrentHealth, MaxHealth);
         }
         
         protected override void TakeDamage(int damage)
         {
             CurrentHealth -= damage;
 
-            if (Object.HasInputAuthority)
-            {
-                _healthView.UpdateHealthView(CurrentHealth, MaxHealth);
-            }
+            RPC_SetHealthView(CurrentHealth, MaxHealth);
 
             if (CurrentHealth <= 0)
             {
-                _animationController.PlayerDeath();
+                OnPlayerDead?.Invoke();
+                OnPlayerLoseLifeEvent?.Invoke(transform);
+
+                RPC_ManagementStatusHealthView(false);
             }
+        }
+
+        [Rpc]
+        private void RPC_ManagementStatusHealthView(bool status)
+        {
+            if (Object.HasInputAuthority)
+            {
+                _healthView.gameObject.SetActive(status);
+            }
+        }
+        
+        [Rpc]
+        private void RPC_SetHealthView(int currentHealth, int maxHealth)
+        {
+            if (Object.HasInputAuthority)
+            {
+                _healthView.UpdateHealthView(currentHealth, maxHealth);
+            }
+            
         }
         
         private void OnDisable()

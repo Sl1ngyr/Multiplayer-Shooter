@@ -18,5 +18,5 @@ MonoBehaviour:
   - {fileID: 8977908687067279827, guid: 0132cca2fba22564aa8f5bf1e9422ef6, type: 3}
   _items:
   - {fileID: 4212050405224803700, guid: 6c4dfc58e5b8c4c42908f852bf26fa24, type: 3}
-  _delayToSpawnEnemy: 5
+  _delayToSpawnEnemy: 10
   _delayToSpawnItems: 5

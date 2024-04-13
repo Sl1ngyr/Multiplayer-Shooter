@@ -1,4 +1,5 @@
-﻿using Enemy.AnimationStates;
+﻿using System.Collections.Generic;
+using Enemy.AnimationStates;
 using Fusion;
 using Services;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace Enemy
         protected Rigidbody2D RigidbodyEnemy2D;
         protected Animator Animator;
         protected AnimationBehavior EnemyAnimationBehavior;
+        protected List<Transform> ListTargetsToFollow;
         protected Transform TargetToFollow;
         protected EnemyCollisionDetector CollisionDetector;
         protected EnemyHealthSystem EnemyHealthSystem;
@@ -40,9 +42,12 @@ namespace Enemy
 
         public bool IsEnemyDead => IsEnemyDeath;
         
-        public void Init(Transform target)
+        public void Init(List<Transform> targets)
         {
-            TargetToFollow = target;
+            ListTargetsToFollow = targets;
+            Debug.Log(targets.Count.ToString());
+            int randomTarget = Random.Range(0, targets.Count - 1);
+            TargetToFollow = ListTargetsToFollow[randomTarget];
         }
         
         public override void Spawned()
@@ -69,30 +74,44 @@ namespace Enemy
         
         protected void FollowToTarget()
         {
-            if (!IsReachTarget && !IsEnemyDeath)
+            if (IsEnemyDeath && DelayToDeath.ExpiredOrNotRunning(Runner))
+            {
+                EnemyDeath();
+            }
+            
+            if(IsEnemyDeath) return;
+            
+            if (!IsReachTarget)
             {
                 Vector3 direction = (TargetToFollow.transform.position - gameObject.transform.position).normalized;
                 Vector3 positionToMove = transform.position + (EnemyData.Speed * Runner.DeltaTime * direction);
             
                 RigidbodyEnemy2D.MovePosition(positionToMove);
             }
-            else if (IsReachTarget && HasStateAuthority && AttackDelay.ExpiredOrNotRunning(Runner) && !IsEnemyDeath)
+            else if (IsReachTarget && HasStateAuthority && AttackDelay.ExpiredOrNotRunning(Runner))
             {
                 Attack();
                 AttackDelay = TickTimer.CreateFromSeconds(Runner, EnemyData.AttackDelay);
             }
-            else if (IsEnemyDeath && DelayToDeath.ExpiredOrNotRunning(Runner))
-            {
-                EnemyDeath();
-            }
         }
+        
+        protected abstract void Attack();
+        protected abstract void ActionsBeforeDie();
 
-        protected void EnemyDeath()
+        public void SetNewTarget(Transform targetToRemove)
+        {
+            ListTargetsToFollow.Remove(targetToRemove);
+
+            var randomTarget = Random.Range(0, ListTargetsToFollow.Count - 1);
+            TargetToFollow = ListTargetsToFollow[randomTarget];
+        }
+        
+        private void EnemyDeath()
         {
             Runner.Despawn(Object);
         }
         
-        protected void TakeDamageAnimation()
+        private void TakeDamageAnimation()
         {
             if(IsEnemyDeath) return;
             
@@ -102,7 +121,7 @@ namespace Enemy
         }
         
         [Rpc]
-        protected void RPC_ChangeScale(float directionX)
+        private void RPC_ChangeScale(float directionX)
         {
             if (directionX > transform.position.x)
             {
@@ -113,9 +132,6 @@ namespace Enemy
                 RigidbodyEnemy2D.transform.localScale = new Vector2(-1, 1);
             }
         }
-        
-        protected abstract void Attack();
-        protected abstract void ActionsBeforeDie();
         
         private void OnDisable()
         { 

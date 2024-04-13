@@ -21,11 +21,11 @@ namespace Enemy
             _statisticsPlayers.AddPlayerKillsToData(id);
         }
         
-        public void SpawnEnemy(Transform target, BaseEnemyController enemy, Vector2 position)
+        public void SpawnEnemy(List<Transform> targets, BaseEnemyController enemy, Vector2 position)
         {
             NetworkObject enemyObject = Runner.Spawn(enemy.gameObject, position, Quaternion.identity, null, ((runner, o) =>
             {
-                o.GetComponent<BaseEnemyController>().Init(target);
+                o.GetComponent<BaseEnemyController>().Init(targets);
                 o.GetComponent<EnemyHealthSystem>().Init(this);
             }));
             

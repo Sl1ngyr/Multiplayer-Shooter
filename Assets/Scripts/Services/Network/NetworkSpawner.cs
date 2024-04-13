@@ -4,6 +4,7 @@ using Player;
 using UI;
 using UnityEngine;
 using Player.Weapon;
+using Wave;
 
 namespace Services.Network
 {
@@ -19,12 +20,14 @@ namespace Services.Network
         [SerializeField] private NetworkObject _healthView;
 
         [SerializeField] private StatisticsPlayersData _statisticsPlayers;
-        
+        [SerializeField] private WaveController _waveController;
+
         private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
         private Dictionary<PlayerRef, NetworkObject> _spawnedWeapons = new Dictionary<PlayerRef, NetworkObject>();
         
         private string _skinName;
-
+        private int _maxPlayers = 2;
+        
         public Dictionary<PlayerRef, NetworkObject> Players => _spawnedCharacters;
 
         public void PlayerJoined(PlayerRef player)
@@ -35,6 +38,14 @@ namespace Services.Network
                 SpawnPlayer(player);
                 
                 _statisticsPlayers.InitPlayers(player.PlayerId);
+                
+                _waveController.Init(_spawnedCharacters[player].transform, _networkRunner.SessionInfo.PlayerCount);
+                
+            }
+
+            if (_networkRunner.SessionInfo.PlayerCount == _maxPlayers)
+            {
+                _waveController.StartWave();
             }
         }
 
@@ -52,7 +63,7 @@ namespace Services.Network
                 _spawnedWeapons.Remove(player);
             }
         }
-        
+
         private void SpawnPlayer(PlayerRef player)
         {
             int weaponNumber = Random.Range(0, _weaponDatas.Count - 1);

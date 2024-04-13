@@ -10,10 +10,10 @@ namespace Enemy
 
         public void OnTriggerStay2D(Collider2D coll)
         {
-            SetNewTarget(coll.transform);
+            SetNewTargetForAttack(coll.transform);
             
             if (coll.transform.TryGetComponent(out MotionHandler player))
-            {
+            { 
                 _enemyController.ReachTarget = true;
             }
         }
@@ -22,13 +22,21 @@ namespace Enemy
         {
             if (coll.transform.TryGetComponent(out MotionHandler player))
             {
+                if (player.IsPlayerDead)
+                {
+                    _enemyController.SetNewTarget(player.transform);
+                }
+                
                 _enemyController.ReachTarget = false;
             }
         }
 
-        private void SetNewTarget(Transform transform)
+        private void SetNewTargetForAttack(Transform target)
         {
-            _enemyController.TargetTransform = transform;
+            if (_enemyController.TargetTransform != target)
+            {
+                _enemyController.TargetTransform = target;
+            }
         }
         
     }
