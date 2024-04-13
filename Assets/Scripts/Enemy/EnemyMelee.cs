@@ -1,4 +1,5 @@
-﻿using Enemy.AnimationStates;
+﻿using System;
+using Enemy.AnimationStates;
 using Fusion;
 using UnityEngine;
 
@@ -6,11 +7,12 @@ namespace Enemy
 {
     public class EnemyMelee : BaseEnemyController
     {
-        [SerializeField] private Animator _weaponAnimator;
-
+        public Action OnAttacked;
+        public Action OnEnemyMeleeDead;
+        
         protected override void Attack()
         {
-            _weaponAnimator.SetTrigger(DescriptionEnemyAnimation.ENEMY_MELEE_WEAPON_ATTACK);
+            OnAttacked?.Invoke();
         }
 
         protected override void ActionsBeforeDie()
@@ -29,11 +31,11 @@ namespace Enemy
             
             DelayToDeath = TickTimer.CreateFromSeconds(Runner, TimeToDespawn);
         }
-
+        
         [Rpc]
         private void RPC_DeactivateWeapon()
         {
-            _weaponAnimator.transform.gameObject.SetActive(false);
+            OnEnemyMeleeDead?.Invoke();
         }
     }
 }

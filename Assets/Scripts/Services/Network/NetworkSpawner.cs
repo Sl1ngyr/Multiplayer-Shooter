@@ -49,8 +49,8 @@ namespace Services.Network
         
         private void SpawnPlayer(PlayerRef player)
         {
-            int weaponNumber = Random.Range(0, _playerGuns.Count - 1);
-            
+            int weaponNumber = Random.Range(0, _weaponDatas.Count - 1);
+
             NetworkObject gun = _playerGuns[weaponNumber];
             
             NetworkObject skinPlayer = new NetworkObject();
@@ -72,8 +72,6 @@ namespace Services.Network
                 o.GetComponent<WeaponController>().Init(_weaponDatas[weaponNumber], networkGunObject, _bulletsView);
                 o.GetComponent<PlayerHealthSystem>().Init(_healthView);
             }));
-            
-            //networkPlayerObject.GetComponent<WeaponController>().Init(_weaponDatas[weaponNumber], networkGunObject, _bulletsView);
 
             _playerGuns.RemoveAt(weaponNumber);
             _weaponDatas.RemoveAt(weaponNumber);

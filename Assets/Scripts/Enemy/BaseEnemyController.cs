@@ -49,6 +49,7 @@ namespace Enemy
             CollisionDetector = GetComponent<EnemyCollisionDetector>();
             RigidbodyEnemy2D = GetComponent<Rigidbody2D>();
             Animator = GetComponent<Animator>();
+            
             EnemyAnimationBehavior = new AnimationBehaviorEnemyRun(Animator);
             EnemyAnimationBehavior.Enter();
 

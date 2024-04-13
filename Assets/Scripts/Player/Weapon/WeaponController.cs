@@ -66,10 +66,10 @@ namespace Player.Weapon
                 {
                     if (_numberOfBullets > 0)
                     {
-                        
                         --_numberOfBullets;
                         RPC_SetBulletView(_numberOfBullets, _maxBullets);
-                        _currentWeapon.CreateBullet(transform, _weaponData.Damage, _weaponData.AttackDistance);
+                        
+                        _currentWeapon.CreateBullet(transform, _weaponData.Damage, _weaponData.AttackDistance, _weaponData.ShootTypeWeapon);
                         _shootDelay = TickTimer.CreateFromSeconds(Runner, _weaponData.ShootDelay);
                     }
                     

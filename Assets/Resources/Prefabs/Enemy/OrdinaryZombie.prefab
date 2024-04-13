@@ -250,7 +250,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyData: {fileID: 11400000, guid: f0d30b44fb09a1246ba4a631bbfb35d3, type: 2}
   TimeToDespawn: 2
-  _weaponAnimator: {fileID: 2980596625572071188}
 --- !u!114 &326730016853877967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,6 +290,7 @@ GameObject:
   - component: {fileID: 2445382323126365832}
   - component: {fileID: 2980596625572071188}
   - component: {fileID: 1239085218368828144}
+  - component: {fileID: 3219434006718539094}
   m_Layer: 6
   m_Name: 'Weapon '
   m_TagString: Untagged
@@ -429,6 +429,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 2445382323126365832}
   - {fileID: 1239085218368828144}
+  - {fileID: 3219434006718539094}
 --- !u!114 &2445382323126365832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,6 +485,19 @@ MonoBehaviour:
   SyncSettings: 127
   StateHashes: 0000000036f06ddc054348eb0d286c404e865f43
   TriggerHashes: 00000000fc58318a
+--- !u!114 &3219434006718539094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6709878914754838333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3136ae0c6c94302b45c1c4461b25706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 8977908687067279827}
 --- !u!1 &7640989832933449229
 GameObject:
   m_ObjectHideFlags: 0

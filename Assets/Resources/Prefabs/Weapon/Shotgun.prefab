@@ -184,6 +184,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 5365896432841184025, guid: 2064210151b45e54f9aa64d7e09597c5, type: 3}
   firePoint: {fileID: 6860103516854256632}
+  _spreadAngle: 20
+  _countBulletsForShotgun: 3
 --- !u!114 &3062953456684888656
 MonoBehaviour:
   m_ObjectHideFlags: 0
