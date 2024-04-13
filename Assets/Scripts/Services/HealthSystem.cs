@@ -15,6 +15,8 @@ namespace Services
             CurrentHealth = MaxHealth;
         }
         
-        protected abstract void TakeDamage(int damage);
+        protected virtual void TakeDamage(int damage) {}
+
+        protected virtual void TakeDamage(int damage, int id) {}
     }
 }

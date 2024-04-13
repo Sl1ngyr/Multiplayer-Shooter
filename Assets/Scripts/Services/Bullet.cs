@@ -19,16 +19,20 @@ namespace Services
         
         private int _damage;
         private float _turn;
-
+        private int _ownerId;
+        
         public BulletOwner BulletOwner;
 
         public int Damage => _damage;
+        public int BulletOwnerId => _ownerId;
         
         public void Init(int damage, float despawnTime, float turn)
         {
             _turn = turn;
             _damage = damage;
             life = TickTimer.CreateFromSeconds(Runner, despawnTime / _speed);
+            
+            _ownerId = Object.InputAuthority.PlayerId;
         }
 
         public override void FixedUpdateNetwork()

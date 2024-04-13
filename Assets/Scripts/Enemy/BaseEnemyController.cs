@@ -37,6 +37,8 @@ namespace Enemy
             get => IsReachTarget;
             set => IsReachTarget = value;
         }
+
+        public bool IsEnemyDead => IsEnemyDeath;
         
         public void Init(Transform target)
         {

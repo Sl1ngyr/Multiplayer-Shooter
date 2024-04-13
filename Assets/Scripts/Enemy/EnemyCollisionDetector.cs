@@ -9,7 +9,7 @@ namespace Enemy
 {
     public class EnemyCollisionDetector : NetworkBehaviour
     {
-        public Action<int> OnEnemyTakeDamage;
+        public Action<int, int> OnEnemyTakeDamage;
         public Action OnEnemyActionsWhenTakeDamage;
         
         private void OnTriggerEnter2D(Collider2D coll)
@@ -19,7 +19,7 @@ namespace Enemy
             {
                 if (enemyBullet.BulletOwner == BulletOwner.Player)
                 {
-                    OnEnemyTakeDamage?.Invoke(enemyBullet.Damage);
+                    OnEnemyTakeDamage?.Invoke(enemyBullet.BulletOwnerId,enemyBullet.Damage);
                     OnEnemyActionsWhenTakeDamage?.Invoke();
                 }
             }

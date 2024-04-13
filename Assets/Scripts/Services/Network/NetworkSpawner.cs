@@ -9,12 +9,16 @@ namespace Services.Network
 {
     public class NetworkSpawner : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     {
+        [SerializeField] private NetworkRunner _networkRunner;
+        
         [SerializeField] private List<NetworkObject> _playerPrefab;
         [SerializeField] private List<WeaponData> _weaponDatas;
-        [SerializeField] private NetworkRunner _networkRunner;
         [SerializeField] private List<NetworkObject> _playerGuns;
+        
         [SerializeField] private NetworkObject _bulletsView;
         [SerializeField] private NetworkObject _healthView;
+
+        [SerializeField] private StatisticsPlayersData _statisticsPlayers;
         
         private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
         private Dictionary<PlayerRef, NetworkObject> _spawnedWeapons = new Dictionary<PlayerRef, NetworkObject>();
@@ -29,6 +33,8 @@ namespace Services.Network
             {
                 RPC_SetSkinName();
                 SpawnPlayer(player);
+                
+                _statisticsPlayers.InitPlayers(player.PlayerId);
             }
         }
 

@@ -27,7 +27,6 @@ namespace Enemy
 
         protected override void ActionsBeforeDie()
         {
-            if(IsEnemyDeath) return;
             IsEnemyDeath = true;
             
             EnemyAnimationBehavior.Exit();
