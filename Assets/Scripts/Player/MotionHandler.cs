@@ -1,5 +1,4 @@
-﻿using CameraComponents;
-using Fusion;
+﻿using Fusion;
 using Services.Network;
 using UnityEngine;
 
@@ -23,13 +22,6 @@ namespace Player
             _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
             _playerHealthSystem = GetComponent<PlayerHealthSystem>();
             
-            if (Object.HasInputAuthority)
-            {
-                Camera camera = Camera.main;
-                
-                camera.GetComponent<FollowCamera>().CameraAnchorPoint = transform;
-            }
-
             _playerHealthSystem.OnPlayerDead += DeactivateComponents;
         }
 
