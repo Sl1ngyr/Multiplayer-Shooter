@@ -28,8 +28,6 @@ namespace Services.Network
         private string _skinName;
         private int _maxPlayers = 2;
         
-        public Dictionary<PlayerRef, NetworkObject> Players => _spawnedCharacters;
-
         public void PlayerJoined(PlayerRef player)
         {
             if (_networkRunner.IsServer)
@@ -40,7 +38,6 @@ namespace Services.Network
                 _statisticsPlayers.InitPlayers(player.PlayerId);
                 
                 _waveController.Init(player.PlayerId, _spawnedCharacters[player].transform, _networkRunner.SessionInfo.PlayerCount);
-                
             }
 
             if (_networkRunner.SessionInfo.PlayerCount == _maxPlayers)

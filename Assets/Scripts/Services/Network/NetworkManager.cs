@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Fusion;
 using Fusion.Sockets;
 using Joystick_Pack.Scripts.Joysticks;
+using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +13,8 @@ namespace Services.Network
     {
         [SerializeField] private FixedJoystick _movementController;
         [SerializeField] private FixedJoystick _shotController;
-
+        [SerializeField] private LoadingView _loadingView;
+        
         private string _sessionName = "TestRoom";
         
         private NetworkRunner _networkRunner;
@@ -53,7 +55,11 @@ namespace Services.Network
             input.Set(data);
         }
         
-        public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) {}
+        public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
+        {
+            _loadingView.LoadingStatusManagement(false); 
+        }
+        
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) {}
         public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) {}
         public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) {}

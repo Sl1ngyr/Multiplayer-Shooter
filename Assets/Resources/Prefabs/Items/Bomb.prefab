@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _despawnTime: 20
-  _timeToDetonate: 1
+  _timeToDetonate: 0.5
 --- !u!58 &4539374763103806340
 CircleCollider2D:
   m_ObjectHideFlags: 0
