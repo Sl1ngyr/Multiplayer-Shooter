@@ -8,7 +8,6 @@ namespace Services
     {
         [SerializeField] private TablePlayersResult _tablePlayersResult;
         
-        
         [Rpc]
         public void RPC_SetStatisticsPlayersDataToUI(int[] playerKey, int[] playerkills, int[] playerDamage)
         {

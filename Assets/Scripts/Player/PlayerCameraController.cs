@@ -10,7 +10,6 @@ namespace Player
 
         public override void Spawned()
         {
-            
             if (Object.HasInputAuthority)
             {
                 _camera = Camera.main;

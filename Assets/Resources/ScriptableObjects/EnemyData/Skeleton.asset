@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Skeleton
   m_EditorClassIdentifier: 
   _speed: 5
-  _damage: 1
-  _hp: 10
+  _damage: 3
+  _hp: 7
   _attackDelay: 2

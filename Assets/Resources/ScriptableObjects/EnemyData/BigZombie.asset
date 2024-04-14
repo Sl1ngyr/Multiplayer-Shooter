@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BigZombie
   m_EditorClassIdentifier: 
   _speed: 3
-  _damage: 5
-  _hp: 25
-  _attackDelay: 1.5
+  _damage: 10
+  _hp: 30
+  _attackDelay: 3

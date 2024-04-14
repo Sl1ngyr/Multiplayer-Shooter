@@ -2,6 +2,7 @@
 using System.Linq;
 using Enemy;
 using Fusion;
+using Items;
 using Player;
 using Services;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace Wave
         [SerializeField] private TimerWaveController _timerWaveController;
         [SerializeField] private StatisticsPlayersData _statisticsPlayers;
         [SerializeField] private StatisticsPlayersController _statisticsPlayersController;
+        [SerializeField] private ItemSpawner _itemSpawner;
         
         [Networked] private TickTimer _spawnEnemy { get; set; }
         [Networked] private TickTimer _spawnItems { get; set; }
@@ -96,7 +98,7 @@ namespace Wave
         
         private void SpawnRandomEnemy()
         {
-            var randomEnemyNumber = Random.Range(0, _waveDatas[_currentWave].Enemies.Count - 1);
+            var randomEnemyNumber = Random.Range(0, _waveDatas[_currentWave].Enemies.Count);
             
             List<Transform> _transforms = _playerTransforms.Values.ToList();
             
@@ -105,9 +107,9 @@ namespace Wave
 
         private void SpawnRandomItems()
         {
-            var randomItemNumber = Random.Range(0, _waveDatas[_currentWave].Items.Count - 1);
+            var randomItemNumber = Random.Range(0, _waveDatas[_currentWave].Items.Count);
             
-            Runner.Spawn(_waveDatas[_currentWave].Items[randomItemNumber], GetRandomPositionForSpawn(), Quaternion.identity, null);
+            _itemSpawner.SpawnItems(_waveDatas[_currentWave].Items[randomItemNumber], GetRandomPositionForSpawn());
         }
         
         private Vector2 GetRandomPositionForSpawn()
@@ -139,9 +141,20 @@ namespace Wave
 
         private void DeactivateWave()
         {
+            if (_playerTransforms != null)
+            {
+                List<Transform> _players = _playerTransforms.Values.ToList();
+                
+                foreach (var player in _players)
+                {
+                    player.GetComponent<PlayerHealthSystem>().OnPlayerDead?.Invoke();
+                }
+            }
+            
             _isRunning = false;
 
             _enemySpawner.DestroyAllEnemies();
+            _itemSpawner.DestroyAllItems();
             
             _timerWaveController.RPC_TimerStatusManagement(false);
             

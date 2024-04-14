@@ -19,9 +19,9 @@ namespace UI
         {
             var button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
             var skinName = button.GetComponent<ButtonSkinsDescription>().SkinName;
-            Debug.Log(skinName + "Selected skin");
+
             PlayerPrefs.SetString(PLAYER_PREFS_SKIN, skinName);
-            Debug.Log(PlayerPrefs.GetString(ChangeSkin.PLAYER_PREFS_SKIN) + "NOW SKin");
+            
         }
 
         private void SaveSkin()

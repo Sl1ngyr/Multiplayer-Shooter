@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Ak
   m_EditorClassIdentifier: 
   _sprite: {fileID: 21300000, guid: 312b97d9dc22ca94c99f0f957845925c, type: 2}
-  _attackDistance: 10
-  _damage: 10
-  _shootDelay: 0.2
+  _attackDistance: 20
+  _damage: 8
+  _shootDelay: 0.5
   _shotType: 0
   _numberOfBullets: 120

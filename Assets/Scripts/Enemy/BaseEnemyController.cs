@@ -63,8 +63,6 @@ namespace Enemy
 
             CollisionDetector.OnEnemyActionsWhenTakeDamage += TakeDamageAnimation;
             EnemyHealthSystem.OnEnemyDeath += ActionsBeforeDie;
-            
-            AttackDelay = TickTimer.CreateFromSeconds(Runner, EnemyData.AttackDelay);
         }
 
         public void SetNewTarget(Transform targetToRemove)

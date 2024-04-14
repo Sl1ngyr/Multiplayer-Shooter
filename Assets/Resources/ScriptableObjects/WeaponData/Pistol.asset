@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   _sprite: {fileID: 21300000, guid: 3d144fbdcd8318b48abff2ac45c31666, type: 2}
-  _attackDistance: 4
-  _damage: 5
-  _shootDelay: 0.3
+  _attackDistance: 6
+  _damage: 15
+  _shootDelay: 0.5
   _shotType: 0
   _numberOfBullets: 50

@@ -7,7 +7,6 @@ namespace Player
 {
     public class PlayerHealthSystem : HealthSystem
     {
-
         [Networked] private NetworkObject _networkHealthView { get; set; }
 
         private HealthView _healthView;

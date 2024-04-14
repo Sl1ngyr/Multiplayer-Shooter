@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: OrdinaryZombie
   m_EditorClassIdentifier: 
   _speed: 5
-  _damage: 3
-  _hp: 15
-  _attackDelay: 2
+  _damage: 2
+  _hp: 10
+  _attackDelay: 1.5

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b4cb83c218477d8ba0ee950ae11507, type: 3}
   m_Name: FirstWave
   m_EditorClassIdentifier: 
-  _break: 5
-  _duration: 30
+  _break: 10
+  _duration: 60
   _enemies:
   - {fileID: 8977908687067279827, guid: 0132cca2fba22564aa8f5bf1e9422ef6, type: 3}
   _items:
   - {fileID: 4212050405224803700, guid: 6c4dfc58e5b8c4c42908f852bf26fa24, type: 3}
-  _delayToSpawnEnemy: 10
+  _delayToSpawnEnemy: 3
   _delayToSpawnItems: 7

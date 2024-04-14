@@ -8,6 +8,5 @@ namespace UI
         public TextMeshProUGUI PlayerName;
         public TextMeshProUGUI PlayerKills;
         public TextMeshProUGUI PlayerDamage;
-        
     }
 }

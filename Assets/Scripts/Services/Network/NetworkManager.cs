@@ -14,6 +14,7 @@ namespace Services.Network
         [SerializeField] private FixedJoystick _shotController;
 
         private string _sessionName = "TestRoom";
+        
         private NetworkRunner _networkRunner;
 
         private void Awake()

@@ -9,7 +9,6 @@ namespace Services
         
         protected int CurrentHealth;
         
-        
         public override void Spawned()
         {
             CurrentHealth = MaxHealth;

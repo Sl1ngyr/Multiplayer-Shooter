@@ -47,7 +47,6 @@ namespace UI
             _joinGame.onClick.AddListener(JoinGame);
             _changeSkin.onClick.AddListener(EnterChangeSkin);
             _exitGame.onClick.AddListener(ExitGame);
-            
         }
 
         private void OnDisable()
