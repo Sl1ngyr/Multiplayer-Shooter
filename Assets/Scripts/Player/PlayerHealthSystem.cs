@@ -15,8 +15,10 @@ namespace Player
         private HealthView _healthView;
         private CollisionDetector _collisionDetector;
 
+        private bool _isPlayerDead = false;
+        
         public Action OnPlayerDead;
-        public Action<Transform> OnPlayerLoseLifeEvent;
+        public Action<int> OnPlayerLoseLifeEvent;
         
         public void Init(NetworkObject networkObject)
         {
@@ -48,6 +50,8 @@ namespace Player
         
         protected override void TakeDamage(int damage)
         {
+            if(_isPlayerDead) return;
+
             CurrentHealth -= damage;
 
             RPC_SetHealthView(CurrentHealth, MaxHealth);
@@ -55,8 +59,10 @@ namespace Player
             if (CurrentHealth <= 0)
             {
                 OnPlayerDead?.Invoke();
-                OnPlayerLoseLifeEvent?.Invoke(transform);
-
+                OnPlayerLoseLifeEvent?.Invoke(Object.InputAuthority.PlayerId);
+                
+                _isPlayerDead = true;
+                
                 RPC_ManagementStatusHealthView(false);
             }
         }

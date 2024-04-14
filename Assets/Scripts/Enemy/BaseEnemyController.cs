@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Enemy.AnimationStates;
 using Fusion;
+using Player;
 using Services;
 using UnityEngine;
 
@@ -45,8 +46,8 @@ namespace Enemy
         public void Init(List<Transform> targets)
         {
             ListTargetsToFollow = targets;
-            Debug.Log(targets.Count.ToString());
-            int randomTarget = Random.Range(0, targets.Count - 1);
+            
+            int randomTarget = Random.Range(0, targets.Count);
             TargetToFollow = ListTargetsToFollow[randomTarget];
         }
         
@@ -66,8 +67,22 @@ namespace Enemy
             AttackDelay = TickTimer.CreateFromSeconds(Runner, EnemyData.AttackDelay);
         }
 
+        public void SetNewTarget(Transform targetToRemove)
+        {
+            ListTargetsToFollow.Remove(targetToRemove);
+
+            var randomTarget = Random.Range(0, ListTargetsToFollow.Count);
+            
+            TargetToFollow = ListTargetsToFollow[randomTarget];
+        }
+
         public override void FixedUpdateNetwork()
         {
+            if (CheckIsTargetAlive())
+            {
+                SetNewTarget(TargetToFollow);
+            }
+            
             RPC_ChangeScale(TargetToFollow.transform.position.x);
             FollowToTarget();
         }
@@ -98,12 +113,9 @@ namespace Enemy
         protected abstract void Attack();
         protected abstract void ActionsBeforeDie();
 
-        public void SetNewTarget(Transform targetToRemove)
+        private bool CheckIsTargetAlive()
         {
-            ListTargetsToFollow.Remove(targetToRemove);
-
-            var randomTarget = Random.Range(0, ListTargetsToFollow.Count - 1);
-            TargetToFollow = ListTargetsToFollow[randomTarget];
+            return TargetToFollow.GetComponent<MotionHandler>().IsPlayerDead;
         }
         
         private void EnemyDeath()

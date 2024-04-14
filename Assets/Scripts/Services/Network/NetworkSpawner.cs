@@ -39,7 +39,7 @@ namespace Services.Network
                 
                 _statisticsPlayers.InitPlayers(player.PlayerId);
                 
-                _waveController.Init(_spawnedCharacters[player].transform, _networkRunner.SessionInfo.PlayerCount);
+                _waveController.Init(player.PlayerId, _spawnedCharacters[player].transform, _networkRunner.SessionInfo.PlayerCount);
                 
             }
 
@@ -66,7 +66,7 @@ namespace Services.Network
 
         private void SpawnPlayer(PlayerRef player)
         {
-            int weaponNumber = Random.Range(0, _weaponDatas.Count - 1);
+            int weaponNumber = Random.Range(0, _weaponDatas.Count);
 
             NetworkObject gun = _playerGuns[weaponNumber];
             

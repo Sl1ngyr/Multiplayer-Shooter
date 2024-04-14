@@ -50,6 +50,8 @@ namespace Player
 
         private void DeactivateComponents()
         {
+            if(_isPlayerDead) return;
+            
             _capsuleCollider2D.enabled = false;
             _rigidbody2D.simulated = false;
 

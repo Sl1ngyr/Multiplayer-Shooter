@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Enemy;
 using Fusion;
 using Player;
@@ -24,16 +25,16 @@ namespace Wave
         private int _maxWave;
         private bool _isRunning = false;
         
-        private List<Transform> _playerTransforms = new List<Transform>();
+        private Dictionary<int, Transform> _playerTransforms = new Dictionary<int, Transform>();
         
         public bool IsWaveLaunch => _isRunning;
 
-        public void Init(Transform transformPlayer, int numberOfPlayers)
+        public void Init(int id, Transform transformPlayer, int numberOfPlayers)
         {
             _numberOfLivePlayers = numberOfPlayers;
-            
-            _playerTransforms.Add(transformPlayer);
 
+            _playerTransforms.Add(id,transformPlayer);
+            
             transformPlayer.GetComponent<PlayerHealthSystem>().OnPlayerLoseLifeEvent += RemovePlayerTransform;
         }
         
@@ -74,36 +75,31 @@ namespace Wave
             
         }
         
-        private void RemovePlayerTransform(Transform transform)
+        private void RemovePlayerTransform(int id)
         {
-            _numberOfLivePlayers--;
-
-            if (_numberOfLivePlayers == 0)
+            if (_playerTransforms.TryGetValue(id, out Transform value))
             {
-                transform.GetComponent<PlayerHealthSystem>().OnPlayerLoseLifeEvent -= RemovePlayerTransform;
+                value.GetComponent<PlayerHealthSystem>().OnPlayerLoseLifeEvent -= RemovePlayerTransform;
                 
-                DeactivateWave();
-                return;
+                _numberOfLivePlayers--;
+                
+                _playerTransforms.Remove(id);
             }
             
-            foreach (var playerTransform in _playerTransforms)
+            if (_numberOfLivePlayers == 0)
             {
-                if (playerTransform == transform)
-                {
-                    playerTransform.GetComponent<PlayerHealthSystem>().OnPlayerLoseLifeEvent -= RemovePlayerTransform;
-                    
-                    _playerTransforms.Remove(playerTransform);
-                    
-                    return;
-                }
+                DeactivateWave();
             }
+            
         }
         
         private void SpawnRandomEnemy()
         {
             var randomEnemyNumber = Random.Range(0, _waveDatas[_currentWave].Enemies.Count - 1);
-
-            _enemySpawner.SpawnEnemy(_playerTransforms, _waveDatas[_currentWave].Enemies[randomEnemyNumber], GetRandomPositionForSpawn());
+            
+            List<Transform> _transforms = _playerTransforms.Values.ToList();
+            
+            _enemySpawner.SpawnEnemy(_transforms, _waveDatas[_currentWave].Enemies[randomEnemyNumber], GetRandomPositionForSpawn());
         }
 
         private void SpawnRandomItems()

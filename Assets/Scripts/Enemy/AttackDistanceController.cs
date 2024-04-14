@@ -22,11 +22,11 @@ namespace Enemy
         {
             if (coll.transform.TryGetComponent(out MotionHandler player))
             {
-                if (player.IsPlayerDead)
+                if (!coll.enabled)
                 {
                     _enemyController.SetNewTarget(player.transform);
                 }
-                
+
                 _enemyController.ReachTarget = false;
             }
         }
