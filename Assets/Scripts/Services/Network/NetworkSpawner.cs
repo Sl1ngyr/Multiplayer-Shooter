@@ -18,7 +18,7 @@ namespace Services.Network
         
         [SerializeField] private NetworkObject _bulletsView;
         [SerializeField] private NetworkObject _healthView;
-
+        
         [SerializeField] private StatisticsPlayersData _statisticsPlayers;
         [SerializeField] private WaveController _waveController;
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using Fusion;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Wave
@@ -24,6 +23,12 @@ namespace Wave
         {
             _breakTime = breakTime;
             _waveTime = waveTime;
+        }
+
+        [Rpc]
+        public void RPC_TimerStatusManagement(bool status)
+        {
+            gameObject.SetActive(status);
         }
         
         public override void FixedUpdateNetwork()

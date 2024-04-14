@@ -1,15 +1,13 @@
 ﻿using Fusion;
 using Services;
 using UI;
-using UnityEngine;
 using System;
 
 namespace Player
 {
     public class PlayerHealthSystem : HealthSystem
     {
-        [SerializeField] private AnimationController _animationController;
-        
+
         [Networked] private NetworkObject _networkHealthView { get; set; }
 
         private HealthView _healthView;

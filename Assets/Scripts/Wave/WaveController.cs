@@ -3,7 +3,7 @@ using System.Linq;
 using Enemy;
 using Fusion;
 using Player;
-using Services.Network;
+using Services;
 using UnityEngine;
 
 namespace Wave
@@ -11,9 +11,11 @@ namespace Wave
     public class WaveController : NetworkBehaviour
     {
         [SerializeField] private List<WaveData> _waveDatas;
-        [SerializeField] private NetworkSpawner _networkSpawner;
         [SerializeField] private Vector2 _spawnPosition;
+        
         [SerializeField] private TimerWaveController _timerWaveController;
+        [SerializeField] private StatisticsPlayersData _statisticsPlayers;
+        [SerializeField] private StatisticsPlayersController _statisticsPlayersController;
         
         [Networked] private TickTimer _spawnEnemy { get; set; }
         [Networked] private TickTimer _spawnItems { get; set; }
@@ -68,11 +70,10 @@ namespace Wave
                 _spawnEnemy = TickTimer.CreateFromSeconds(Runner, _waveDatas[_currentWave].DelayToSpawnEnemy);
             }
         }
-
+        
         public void StartWave()
         {
             _isRunning = true;
-            
         }
         
         private void RemovePlayerTransform(int id)
@@ -135,14 +136,19 @@ namespace Wave
             _spawnItems = TickTimer.CreateFromSeconds(Runner, _waveDatas[_currentWave].DelayToSpawnItems);
         }
         
-        
+
         private void DeactivateWave()
         {
             _isRunning = false;
 
             _enemySpawner.DestroyAllEnemies();
+            
+            _timerWaveController.RPC_TimerStatusManagement(false);
+            
+            _statisticsPlayersController.RPC_SetStatisticsPlayersDataToUI(_statisticsPlayers.GetPlayersKey(),
+                _statisticsPlayers.GetPlayersKills(), _statisticsPlayers.GetPlayersDamage());
         }
-        
+
         private void OnDisable()
         { 
             _timerWaveController.EndWave -= ChangeWave;
