@@ -58,7 +58,6 @@ namespace Services
             if (coll.TryGetComponent(out PlayerHealthSystem player))
             {
                 if(BulletOwner != BulletOwner.Enemy) return;
-                
                 else if(Object != null)
                 {
                     Runner.Despawn(Object);

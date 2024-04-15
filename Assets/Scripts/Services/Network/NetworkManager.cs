@@ -14,7 +14,7 @@ namespace Services.Network
         [SerializeField] private FixedJoystick _movementController;
         [SerializeField] private FixedJoystick _shotController;
         [SerializeField] private LoadingView _loadingView;
-        
+
         private string _sessionName = "TestRoom";
         
         private NetworkRunner _networkRunner;
@@ -57,7 +57,7 @@ namespace Services.Network
         
         public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
         {
-            _loadingView.LoadingStatusManagement(false); 
+            _loadingView.LoadingStatusManagement(false);
         }
         
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) {}

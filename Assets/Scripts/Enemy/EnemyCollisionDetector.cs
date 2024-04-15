@@ -1,7 +1,6 @@
 ﻿using System;
 using Fusion;
 using Items;
-using Player;
 using Services;
 using UnityEngine;
 
@@ -14,7 +13,6 @@ namespace Enemy
         
         private void OnTriggerEnter2D(Collider2D coll)
         {
-            
             if (coll.TryGetComponent(out Bullet enemyBullet))
             {
                 if (enemyBullet.BulletOwner == BulletOwner.Player)
@@ -27,7 +25,6 @@ namespace Enemy
         
         private void OnTriggerStay2D(Collider2D coll)
         {
-            
             if (coll.TryGetComponent(out BombItem bomb))
             {
                 if (bomb.IsBombDetonate)

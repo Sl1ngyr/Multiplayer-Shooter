@@ -14,6 +14,7 @@ namespace UI
         [SerializeField] private Canvas _startMenu;
         
         public const string PLAYER_PREFS_SKIN = "Skin";
+        public const string SKIN_BY_DEFAULT = "Player_1";
         
         private void SelectSkin()
         {

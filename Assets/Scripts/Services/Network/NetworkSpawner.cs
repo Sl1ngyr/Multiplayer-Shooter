@@ -68,7 +68,9 @@ namespace Services.Network
             NetworkObject gun = _playerGuns[weaponNumber];
             
             NetworkObject skinPlayer = new NetworkObject();
-            
+
+            if (_skinName == "") _skinName = ChangeSkin.SKIN_BY_DEFAULT;
+
             foreach (var prefab in _playerPrefab)
             {
                 if (prefab.gameObject.name == _skinName)
@@ -98,6 +100,5 @@ namespace Services.Network
         {
             _skinName = PlayerPrefs.GetString(ChangeSkin.PLAYER_PREFS_SKIN);
         }
-        
     }
 }
