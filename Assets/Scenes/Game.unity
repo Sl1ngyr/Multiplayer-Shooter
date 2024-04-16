@@ -145654,6 +145654,7 @@ MonoBehaviour:
   _movementController: {fileID: 3709743678104457054}
   _shotController: {fileID: 1384068676193629981}
   _loadingView: {fileID: 1730055473}
+  _networkSpawner: {fileID: 1876597391}
 --- !u!4 &1735026279
 Transform:
   m_ObjectHideFlags: 0
@@ -146226,6 +146227,7 @@ MonoBehaviour:
   _healthView: {fileID: 463932247}
   _statisticsPlayers: {fileID: 891187810}
   _waveController: {fileID: 841572561}
+  _PlayerSkin: 
 --- !u!4 &1876597392
 Transform:
   m_ObjectHideFlags: 0

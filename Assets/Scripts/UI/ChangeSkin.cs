@@ -8,16 +8,17 @@ namespace UI
     public class ChangeSkin : MonoBehaviour
     {
         [SerializeField] private List<Button> _skinsButtons;
-
+        
         [SerializeField] private Button _saveSkin;
         [SerializeField] private Button _closeSkinMenu;
 
         [SerializeField] private Canvas _startMenu;
-        
+
         private void SelectSkin()
         {
             var button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
             var skinName = button.GetComponent<ButtonSkinsDescription>().SkinName;
+
             PlayerPrefs.SetString(Constants.PLAYER_PREFS_SKIN, skinName);
             
         }

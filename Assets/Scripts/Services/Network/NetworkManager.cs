@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Fusion;
 using Fusion.Sockets;
@@ -18,7 +19,7 @@ namespace Services.Network
         private string _sessionName = "TestRoom";
         
         private NetworkRunner _networkRunner;
-
+        
         private void Awake()
         {
             _networkRunner = GetComponent<NetworkRunner>();
@@ -41,7 +42,8 @@ namespace Services.Network
                 GameMode = GameMode.AutoHostOrClient,
                 SessionName = _sessionName,
                 Scene = scene,
-                SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
+                SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>(),
+
             });
         }
 
@@ -59,8 +61,9 @@ namespace Services.Network
         public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
         {
             _loadingView.LoadingStatusManagement(false);
+            
         }
-  
+        
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) {}
         public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) {}
         public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) {}
