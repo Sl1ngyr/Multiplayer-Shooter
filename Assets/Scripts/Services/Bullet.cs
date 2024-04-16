@@ -18,17 +18,16 @@ namespace Services
         [Networked] private TickTimer life { get; set; }
         
         private int _damage;
-        private float _turn;
         private int _ownerId;
-        
+
         public BulletOwner BulletOwner;
 
         public int Damage => _damage;
         public int BulletOwnerId => _ownerId;
         
-        public void Init(int damage, float despawnTime, float turn)
+
+        public void Init(int damage, float despawnTime)
         {
-            _turn = turn;
             _damage = damage;
             life = TickTimer.CreateFromSeconds(Runner, despawnTime / _speed);
             
@@ -40,7 +39,7 @@ namespace Services
             if (life.Expired(Runner))
                 Runner.Despawn(Object);
             else
-                transform.position += (transform.right * _turn) * Runner.DeltaTime * _speed;
+                transform.position += transform.up * Runner.DeltaTime * _speed;
         }
 
         private void OnTriggerEnter2D(Collider2D coll)

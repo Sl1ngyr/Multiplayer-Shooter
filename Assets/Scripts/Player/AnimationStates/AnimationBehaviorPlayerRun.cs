@@ -11,12 +11,12 @@ namespace Player.AnimationStates
 
         public override void Enter()
         {
-            Animator.SetBool(DescriptionPlayerAnimation.PLAYER_RUN, true);
+            Animator.SetBool(Constants.PLAYER_RUN, true);
         }
 
         public override void Exit()
         {
-            Animator.SetBool(DescriptionPlayerAnimation.PLAYER_RUN, false);
+            Animator.SetBool(Constants.PLAYER_RUN, false);
         }
     }
 }

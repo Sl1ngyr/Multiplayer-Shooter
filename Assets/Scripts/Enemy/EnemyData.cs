@@ -5,14 +5,10 @@ namespace Enemy
     [CreateAssetMenu(fileName = "EnemyData", menuName = "ScriptableObjects/EnemyData")]
     public class EnemyData : ScriptableObject
     {
-        [SerializeField] private float _speed;
-        [SerializeField] private int _damage;
-        [SerializeField] private int _hp;
-        [SerializeField] private float _attackDelay;
+        [field: SerializeField] public float Speed { get; private set;}
+        [field: SerializeField] public int Damage { get; private set;}
+        [field: SerializeField] public int HP { get; private set;}
+        [field: SerializeField] public float AttackDelay { get; private set;}
         
-        public float Speed => _speed;
-        public int Damage => _damage;
-        public int HP => _hp;
-        public float AttackDelay => _attackDelay;
     }
 }

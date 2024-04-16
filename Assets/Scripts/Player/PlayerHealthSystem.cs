@@ -41,7 +41,6 @@ namespace Player
         public void RestoreHealth()
         {
             CurrentHealth = MaxHealth;
-            
             RPC_SetHealthView(CurrentHealth, MaxHealth);
         }
         
@@ -50,14 +49,12 @@ namespace Player
             if(_isPlayerDead) return;
 
             CurrentHealth -= damage;
-
             RPC_SetHealthView(CurrentHealth, MaxHealth);
 
             if (CurrentHealth <= 0)
             {
                 OnPlayerDead?.Invoke();
                 OnPlayerLoseLifeEvent?.Invoke(Object.InputAuthority.PlayerId);
-                
                 _isPlayerDead = true;
                 
                 RPC_ManagementStatusHealthView(false);

@@ -6,8 +6,6 @@ namespace Services
 {
     public class StatisticsPlayersData : NetworkBehaviour
     {
-        [Networked] private NetworkObject _networkObject { get; set; }
-        
         private List<int> _playersKey = new List<int>();
         private Dictionary<int, int> _playersDamage = new Dictionary<int, int>();
         private Dictionary<int, int> _playersKills = new Dictionary<int, int>();

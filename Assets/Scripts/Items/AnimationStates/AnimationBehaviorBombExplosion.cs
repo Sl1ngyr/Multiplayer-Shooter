@@ -11,12 +11,12 @@ namespace Items.AnimationStates
 
         public override void Enter()
         {
-            Animator.SetTrigger(DescriptionItemAnimation.BOMB_EXPLOSION_TRIGGER);
+            Animator.SetTrigger(Constants.BOMB_EXPLOSION_TRIGGER);
         }
 
         public override void Exit()
         {
-            Animator.ResetTrigger(DescriptionItemAnimation.BOMB_EXPLOSION_TRIGGER);
+            Animator.ResetTrigger(Constants.BOMB_EXPLOSION_TRIGGER);
         }
     }
 }

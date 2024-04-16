@@ -139582,9 +139582,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb1e51d6a9c4b1cbc5102789b8a004a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerName: {fileID: 786717970}
-  PlayerKills: {fileID: 1911251324}
-  PlayerDamage: {fileID: 1159403593}
 --- !u!224 &361919991
 RectTransform:
   m_ObjectHideFlags: 0
@@ -139771,7 +139768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &463932245
 RectTransform:
   m_ObjectHideFlags: 0
@@ -139885,7 +139882,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.814093
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -143915,7 +143912,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &935254102
 RectTransform:
   m_ObjectHideFlags: 0
@@ -144104,8 +144101,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1500, y: 1000}
+  m_AnchoredPosition: {x: 0, y: -0.000002861023}
+  m_SizeDelta: {x: 1500, y: 1026.3704}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1058973652
 MonoBehaviour:
@@ -144894,7 +144891,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 28
   m_TargetDisplay: 0
 --- !u!224 &1363822196
 RectTransform:
@@ -145503,10 +145500,10 @@ RectTransform:
   - {fileID: 1815080429}
   m_Father: {fileID: 1363822196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1730055467
 GameObject:
@@ -146164,9 +146161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb1e51d6a9c4b1cbc5102789b8a004a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerName: {fileID: 1815813367}
-  PlayerKills: {fileID: 1588528691}
-  PlayerDamage: {fileID: 1950229433}
 --- !u!1 &1876597389
 GameObject:
   m_ObjectHideFlags: 0
@@ -146221,13 +146215,13 @@ MonoBehaviour:
   - {fileID: 6458400567723347767, guid: e6e85afc9e076c74c8d25fac552f1662, type: 3}
   - {fileID: 6458400567723347767, guid: 369631d6d61acb04c846aba334689d0a, type: 3}
   _weaponDatas:
-  - {fileID: 11400000, guid: f9268c10c83a716408e3235747652094, type: 2}
   - {fileID: 11400000, guid: 9b39577aca890ae40aa7e08732130bf8, type: 2}
   - {fileID: 11400000, guid: 60d738ad800bc8d4ebf3ce842e38ecfd, type: 2}
+  - {fileID: 11400000, guid: f9268c10c83a716408e3235747652094, type: 2}
   _playerGuns:
-  - {fileID: -4243960104536501256, guid: 305980656dfeb174797fd38e3019c42e, type: 3}
   - {fileID: -4243960104536501256, guid: 6cf19837c5674564d9798b8ec005b9a7, type: 3}
   - {fileID: -4243960104536501256, guid: 1d1187a1e50398841ab1e13a6ba50a81, type: 3}
+  - {fileID: -4243960104536501256, guid: 305980656dfeb174797fd38e3019c42e, type: 3}
   _bulletsView: {fileID: 935254104}
   _healthView: {fileID: 463932247}
   _statisticsPlayers: {fileID: 891187810}
@@ -146572,8 +146566,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1999181064}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1169078, y: -9.05007, z: 0.39704502}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.1169076, y: -9.05007, z: 0.39704514}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

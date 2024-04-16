@@ -13,10 +13,7 @@ namespace UI
             _playersDataUI.gameObject.SetActive(true);
             for (int i = 0; i < playerCount; i++)
             {
-                _playerResultDatas[i].PlayerName.text += playerKey[i];
-                _playerResultDatas[i].PlayerKills.text = playerkills[i].ToString();
-                _playerResultDatas[i].PlayerDamage.text = playerDamage[i].ToString();
-                
+                _playerResultDatas[i].Init(playerKey[i].ToString(), playerkills[i].ToString(), playerDamage[i].ToString());
             }
         }
     }

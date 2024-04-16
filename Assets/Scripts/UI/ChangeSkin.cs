@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Services;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,15 +14,11 @@ namespace UI
 
         [SerializeField] private Canvas _startMenu;
         
-        public const string PLAYER_PREFS_SKIN = "Skin";
-        public const string SKIN_BY_DEFAULT = "Player_1";
-        
         private void SelectSkin()
         {
             var button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
             var skinName = button.GetComponent<ButtonSkinsDescription>().SkinName;
-
-            PlayerPrefs.SetString(PLAYER_PREFS_SKIN, skinName);
+            PlayerPrefs.SetString(Constants.PLAYER_PREFS_SKIN, skinName);
             
         }
 

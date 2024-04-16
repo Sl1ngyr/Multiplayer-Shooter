@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Fusion;
 using Player;
-using UI;
 using UnityEngine;
 using Player.Weapon;
 using Wave;
@@ -18,13 +17,15 @@ namespace Services.Network
         
         [SerializeField] private NetworkObject _bulletsView;
         [SerializeField] private NetworkObject _healthView;
-        
+
         [SerializeField] private StatisticsPlayersData _statisticsPlayers;
         [SerializeField] private WaveController _waveController;
-
+        
+        [Networked] public string PlayerId { get; set; }
+        
         private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
         private Dictionary<PlayerRef, NetworkObject> _spawnedWeapons = new Dictionary<PlayerRef, NetworkObject>();
-        
+
         private string _skinName;
         private int _maxPlayers = 2;
         
@@ -32,7 +33,7 @@ namespace Services.Network
         {
             if (_networkRunner.IsServer)
             {
-                RPC_SetSkinName();
+                Debug.Log("spawn");
                 SpawnPlayer(player);
                 
                 _statisticsPlayers.InitPlayers(player.PlayerId);
@@ -60,7 +61,7 @@ namespace Services.Network
                 _spawnedWeapons.Remove(player);
             }
         }
-
+        
         private void SpawnPlayer(PlayerRef player)
         {
             int weaponNumber = Random.Range(0, _weaponDatas.Count);
@@ -68,12 +69,13 @@ namespace Services.Network
             NetworkObject gun = _playerGuns[weaponNumber];
             
             NetworkObject skinPlayer = new NetworkObject();
-
-            if (_skinName == "") _skinName = ChangeSkin.SKIN_BY_DEFAULT;
+            
+            
+            if (string.IsNullOrEmpty(PlayerId)) _skinName = Constants.SKIN_BY_DEFAULT;
 
             foreach (var prefab in _playerPrefab)
             {
-                if (prefab.gameObject.name == _skinName)
+                if (prefab.gameObject.name == PlayerId)
                 {
                     skinPlayer = prefab;
                 }
@@ -92,13 +94,34 @@ namespace Services.Network
             _playerGuns.RemoveAt(weaponNumber);
             _weaponDatas.RemoveAt(weaponNumber);
             _spawnedCharacters.Add(player, networkPlayerObject);
-            _spawnedWeapons.Add(player,networkGunObject);
+            _spawnedWeapons.Add(player, networkGunObject);
         }
 
         [Rpc]
-        private void RPC_SetSkinName()
+        private void RPC_LocalPlayer(string name)
         {
-            _skinName = PlayerPrefs.GetString(ChangeSkin.PLAYER_PREFS_SKIN);
+            PlayerId = name;
         }
+        
+        
+        public override void Spawned()
+        {
+            string id = PlayerPrefs.GetString(Constants.PLAYER_PREFS_SKIN);
+            Debug.Log(id);
+            Debug.Log("Spawned");
+            if (!HasInputAuthority)
+            {
+                Debug.Log("Here");
+                RPC_LocalPlayer(id);
+            }
+
+            if (HasInputAuthority)
+            {
+                string ff = PlayerPrefs.GetString(Constants.PLAYER_PREFS_SKIN);
+                Debug.Log(ff);
+                RPC_LocalPlayer(ff);
+            }
+        }
+
     }
 }

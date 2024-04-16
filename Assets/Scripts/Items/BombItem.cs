@@ -11,10 +11,10 @@ namespace Items
         [SerializeField] private float _timeToDetonate = 1f;
         private Animator _animator;
         private AnimationBehavior _animationBehavior;
-        private bool _isDetonate = false;
+        private bool _hasDetonated = false;
         private bool _isStartDetonate = false;
 
-        public bool IsBombDetonate => _isDetonate;
+        public bool IsBombDetonate => _hasDetonated;
         
         public override void Spawned()
         {
@@ -23,13 +23,13 @@ namespace Items
 
         public override void FixedUpdateNetwork()
         {
-            if (TimerToDespawn.Expired(Runner) && !_isStartDetonate && !_isDetonate)
+            if (TimerToDespawn.Expired(Runner) && !_isStartDetonate && !_hasDetonated)
             {
                 Runner.Despawn(Object);
             }
             else if (TimerToDespawn.Expired(Runner) && _isStartDetonate)
             {
-                _isDetonate = true;
+                _hasDetonated = true;
             }
         }
         
@@ -45,7 +45,7 @@ namespace Items
         {
             if (coll.TryGetComponent(out BaseEnemyController enemy))
             {
-                if (_isDetonate)
+                if (_hasDetonated)
                 {
                     Runner.Despawn(Object);
                 }

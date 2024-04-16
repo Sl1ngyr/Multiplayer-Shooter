@@ -76,7 +76,7 @@ namespace Enemy
 
         public override void FixedUpdateNetwork()
         {
-            if (CheckIsTargetAlive())
+            if (IsTargetAlive())
             {
                 SetNewTarget(TargetToFollow);
             }
@@ -111,7 +111,7 @@ namespace Enemy
         protected abstract void Attack();
         protected abstract void ActionsBeforeDie();
 
-        private bool CheckIsTargetAlive()
+        private bool IsTargetAlive()
         {
             return TargetToFollow.GetComponent<MotionHandler>().IsPlayerDead;
         }

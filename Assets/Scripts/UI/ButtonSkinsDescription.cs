@@ -3,9 +3,9 @@
 namespace UI
 {
     public class ButtonSkinsDescription : MonoBehaviour
-    {
-        [SerializeField] private string _skinName;
+    { 
+        [field: SerializeField] public string SkinName { get; private set; }
         
-        public string SkinName => _skinName;
-    }
+    };
+
 }

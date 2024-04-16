@@ -1,5 +1,4 @@
-﻿using Player.AnimationStates;
-using Services;
+﻿using Services;
 using UnityEngine;
 
 namespace Enemy.AnimationStates
@@ -12,12 +11,12 @@ namespace Enemy.AnimationStates
 
         public override void Enter()
         {
-            Animator.SetTrigger(DescriptionEnemyAnimation.ENEMY_HIT);
+            Animator.SetTrigger(Constants.ENEMY_HIT);
         }
 
         public override void Exit()
         {
-            Animator.ResetTrigger(DescriptionEnemyAnimation.ENEMY_HIT); 
+            Animator.ResetTrigger(Constants.ENEMY_HIT); 
         }
     }
 }

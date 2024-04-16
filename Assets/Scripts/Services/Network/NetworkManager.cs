@@ -22,6 +22,7 @@ namespace Services.Network
         private void Awake()
         {
             _networkRunner = GetComponent<NetworkRunner>();
+            
             StartGame();
         }
 
@@ -43,7 +44,7 @@ namespace Services.Network
                 SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
             });
         }
-        
+
         public void OnInput(NetworkRunner runner, NetworkInput input)
         {
             var data = new NetworkInputData()
@@ -59,7 +60,7 @@ namespace Services.Network
         {
             _loadingView.LoadingStatusManagement(false);
         }
-        
+  
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) {}
         public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) {}
         public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) {}

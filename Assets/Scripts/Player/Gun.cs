@@ -11,6 +11,8 @@ namespace Player
         [SerializeField] private Transform firePoint;
         [SerializeField] private float _spreadAngle = 10f;
         [SerializeField] private int _countBulletsForShotgun = 3;
+
+        private float _bulletRotation = -90;
         
         public void RotateGun(Vector2 direction)
         {
@@ -31,20 +33,21 @@ namespace Player
                     break;
             }
         }
-
+        
         private void SingleShot(Transform playerTransform, int damage, float distance)
         {
+            Quaternion rotation = Quaternion.Euler(0,0, transform.rotation.eulerAngles.z + _bulletRotation * playerTransform.localScale.x);
             
-            Runner.Spawn(_bulletPrefab, firePoint.transform.position, transform.rotation, Object.InputAuthority, ((runner, o) =>
+            Runner.Spawn(_bulletPrefab, firePoint.transform.position, rotation, Object.InputAuthority, ((runner, o) =>
             {
-                o.GetComponent<Bullet>().Init(damage, distance, playerTransform.localScale.x);
+                o.GetComponent<Bullet>().Init(damage, distance);
             }));
         }
 
         private void ShotgunShot(Transform playerTransform, int damage, float distance)
         {
             float angleStep = _spreadAngle / _countBulletsForShotgun;
-            float aimAngle = transform.rotation.eulerAngles.z;
+            float aimAngle = transform.rotation.eulerAngles.z + _bulletRotation * playerTransform.localScale.x;
 
             for (int i = 0; i < _countBulletsForShotgun; i++)
             {
@@ -53,7 +56,7 @@ namespace Player
                 
                 Runner.Spawn(_bulletPrefab, firePoint.transform.position, rotation, Object.InputAuthority, ((runner, o) =>
                 {
-                    o.GetComponent<Bullet>().Init(damage, distance, playerTransform.localScale.x);
+                    o.GetComponent<Bullet>().Init(damage, distance);
                 }));
             }
         }

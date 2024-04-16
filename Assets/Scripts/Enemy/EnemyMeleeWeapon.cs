@@ -1,5 +1,5 @@
-﻿using Enemy.AnimationStates;
-using Fusion;
+﻿using Fusion;
+using Services;
 using UnityEngine;
 
 namespace Enemy
@@ -36,7 +36,7 @@ namespace Enemy
         private void Attack()
         {
             _boxCollider.enabled = true;
-            _weaponAnimator.SetTrigger(DescriptionEnemyAnimation.ENEMY_MELEE_WEAPON_ATTACK);
+            _weaponAnimator.SetTrigger(Constants.ENEMY_MELEE_WEAPON_ATTACK);
         }
 
         private void OnDisable()

@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2753c2270249caaf9059332065d325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skinName: Player_1
+  <SkinName>k__BackingField: Player_1
 --- !u!1 &229053598
 GameObject:
   m_ObjectHideFlags: 0
@@ -8825,7 +8825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2753c2270249caaf9059332065d325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skinName: Player_3
+  <SkinName>k__BackingField: Player_3
 --- !u!1 &1148957760
 GameObject:
   m_ObjectHideFlags: 0
@@ -8960,7 +8960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2753c2270249caaf9059332065d325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skinName: Player_2
+  <SkinName>k__BackingField: Player_2
 --- !u!1 &1386815758
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b4cb83c218477d8ba0ee950ae11507, type: 3}
   m_Name: SecondWave
   m_EditorClassIdentifier: 
-  _break: 30
-  _duration: 180
-  _enemies:
+  <Break>k__BackingField: 30
+  <Duration>k__BackingField: 180
+  <Enemies>k__BackingField:
   - {fileID: 8977908687067279827, guid: 0132cca2fba22564aa8f5bf1e9422ef6, type: 3}
   - {fileID: 22477015026726889, guid: 3a71c28a65317694dba23666d073fcd6, type: 3}
-  _items:
+  <Items>k__BackingField:
   - {fileID: 4212050405224803700, guid: 6c4dfc58e5b8c4c42908f852bf26fa24, type: 3}
   - {fileID: 5107682087944841924, guid: 1983d8ca1391ffa44bcae98eb73d584c, type: 3}
-  _delayToSpawnEnemy: 5
-  _delayToSpawnItems: 6
+  <DelayToSpawnEnemy>k__BackingField: 5
+  <DelayToSpawnItems>k__BackingField: 5

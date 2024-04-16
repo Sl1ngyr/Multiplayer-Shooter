@@ -58,11 +58,13 @@ namespace Player.Weapon
             
             var input = GetInput(out NetworkInputData data);
             
-            if (HasStateAuthority && _shootDelay.ExpiredOrNotRunning(Runner))
+            if (HasStateAuthority)
             {
                 if (data.Aim.magnitude > 0)
                 {
-                    if (_numberOfBullets > 0)
+                    CheckLocalScaleForRotationGun(data.Aim);
+                    
+                    if (_shootDelay.ExpiredOrNotRunning(Runner) && _numberOfBullets > 0)
                     {
                         --_numberOfBullets;
                         RPC_SetBulletView(_numberOfBullets, _maxBullets);
@@ -70,17 +72,22 @@ namespace Player.Weapon
                         _currentWeapon.CreateBullet(transform, _weaponData.Damage, _weaponData.AttackDistance, _weaponData.ShootTypeWeapon);
                         _shootDelay = TickTimer.CreateFromSeconds(Runner, _weaponData.ShootDelay);
                     }
-                    
-                    if (transform.localScale.x < 0)
-                    {
-                        _currentWeapon.RotateGun(-data.Aim);
-                    }
-                    else _currentWeapon.RotateGun(data.Aim);
                 }
-                
             }
         }
 
+        private void CheckLocalScaleForRotationGun(Vector2 aim)
+        {
+            if (transform.localScale.x < 0)
+            {
+                _currentWeapon.RotateGun(-aim);
+            }
+            else
+            {
+                _currentWeapon.RotateGun(aim);
+            }
+        }
+        
         public void RestoreAllBullets()
         {
             _numberOfBullets = _maxBullets;

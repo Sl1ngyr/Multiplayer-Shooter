@@ -11,18 +11,10 @@ namespace Player.Weapon
     [CreateAssetMenu(fileName = "WeaponData", menuName = "ScriptableObjects/WeaponData")]
     public class WeaponData : ScriptableObject
     {
-        [SerializeField] private Sprite _sprite;
-        [SerializeField] private float _attackDistance;
-        [SerializeField] private int _damage;
-        [SerializeField] private float _shootDelay;
-        [SerializeField] private ShotType _shotType;
-        [SerializeField] private int _numberOfBullets;
-        
-        public Sprite Sprite => _sprite;
-        public float AttackDistance => _attackDistance;
-        public int Damage => _damage;
-        public float ShootDelay => _shootDelay;
-        public ShotType ShootTypeWeapon => _shotType;
-        public int NumberOfBullets => _numberOfBullets;
+        [field: SerializeField] public float AttackDistance { get; private set;}
+        [field: SerializeField] public int Damage { get; private set;}
+        [field: SerializeField] public float ShootDelay { get; private set;}
+        [field: SerializeField] public ShotType ShootTypeWeapon { get; private set;}
+        [field: SerializeField] public int NumberOfBullets { get; private set;}
     }
 }

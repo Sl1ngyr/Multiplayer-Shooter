@@ -1,5 +1,4 @@
-﻿using Player.AnimationStates;
-using Services;
+﻿using Services;
 using UnityEngine;
 
 namespace Enemy.AnimationStates
@@ -12,12 +11,12 @@ namespace Enemy.AnimationStates
 
         public override void Enter()
         {
-            Animator.SetBool(DescriptionEnemyAnimation.ENEMY_DEATH, true);
+            Animator.SetBool(Constants.ENEMY_DEATH, true);
         }
 
         public override void Exit()
         {
-            Animator.SetBool(DescriptionEnemyAnimation.ENEMY_DEATH, false);
+            Animator.SetBool(Constants.ENEMY_DEATH, false);
         }
     }
 }
