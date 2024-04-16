@@ -17,27 +17,27 @@ namespace Services.Network
         
         [SerializeField] private NetworkObject _bulletsView;
         [SerializeField] private NetworkObject _healthView;
-
+        [SerializeField] private NetworkObject _joystiksView;
+        
         [SerializeField] private StatisticsPlayersData _statisticsPlayers;
         [SerializeField] private WaveController _waveController;
         
         [Networked] private string _playerPrefsSkin { get; set; }
-        
-        private string skinName;
         private ChangeDetector _changeDetector;
         private PlayerRef _player;
-        
+
         private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
         private Dictionary<PlayerRef, NetworkObject> _spawnedWeapons = new Dictionary<PlayerRef, NetworkObject>();
-
-        private string _skinName;
+        
         private int _maxPlayers = 2;
 
         public override void Spawned()
         {
             _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+            
             RPC_ChangeSkin(PlayerPrefs.GetString(Constants.PLAYER_PREFS_SKIN));
         }
+        
         public override void Render()
         {
             foreach (var change in _changeDetector.DetectChanges(this))
@@ -47,25 +47,11 @@ namespace Services.Network
                     case nameof(_playerPrefsSkin):
                         if (_playerPrefsSkin == "") break;
                         
-                        SpawnPlayers(_player);
+                        SpawnHandler(_player);
                         _playerPrefsSkin = "";
                         break;
                 }
             }
-        }
-        
-        [Rpc]
-        private void RPC_ChangeSkin(string skinName)
-        {
-            if (string.IsNullOrEmpty(skinName))
-            {
-                _playerPrefsSkin = Constants.SKIN_BY_DEFAULT;
-            }
-            else
-            {
-                _playerPrefsSkin = skinName;
-            }
-            
         }
         
         public void PlayerJoined(PlayerRef player)
@@ -88,7 +74,7 @@ namespace Services.Network
             }
         }
 
-        private void SpawnPlayers(PlayerRef player)
+        private void SpawnHandler(PlayerRef player)
         {
             if (_networkRunner.IsServer)
             {
@@ -129,6 +115,7 @@ namespace Services.Network
             {
                 o.GetComponent<WeaponController>().Init(_weaponDatas[weaponNumber], networkGunObject, _bulletsView);
                 o.GetComponent<PlayerHealthSystem>().Init(_healthView);
+                o.GetComponent<MotionHandler>().Init(_joystiksView);
             }));
 
             _playerGuns.RemoveAt(weaponNumber);
@@ -138,5 +125,18 @@ namespace Services.Network
             
         }
         
+        [Rpc]
+        private void RPC_ChangeSkin(string skinName)
+        {
+            if (string.IsNullOrEmpty(skinName))
+            {
+                _playerPrefsSkin = Constants.SKIN_BY_DEFAULT;
+            }
+            else
+            {
+                _playerPrefsSkin = skinName;
+            }
+            
+        }
     }
 }

@@ -8,6 +8,9 @@ namespace Player
     {
         [SerializeField] private float _speed;
         
+        [Networked] private NetworkObject _networkedJoysticks { get; set; }
+        private NetworkObject _joysticks;
+        
         private Rigidbody2D _rigidbody2D;
         private PlayerHealthSystem _playerHealthSystem;
         private CapsuleCollider2D _capsuleCollider2D;
@@ -15,12 +18,22 @@ namespace Player
         private bool _isPlayerDead = false;
 
         public bool IsPlayerDead => _isPlayerDead;
+
+        public void Init(NetworkObject joystiks)
+        {
+            _networkedJoysticks = joystiks;
+        }
         
         public override void Spawned()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
             _playerHealthSystem = GetComponent<PlayerHealthSystem>();
+            
+            if (Object.HasInputAuthority)
+            {
+                _joysticks = _networkedJoysticks;
+            }
             
             _playerHealthSystem.OnPlayerDead += DeactivateComponents;
         }
@@ -46,8 +59,19 @@ namespace Player
             
             _capsuleCollider2D.enabled = false;
             _rigidbody2D.simulated = false;
-
+            
+            RPC_ManagementStatusJoystiksView(false);
+            
             _isPlayerDead = true;
+        }
+        
+        [Rpc]
+        private void RPC_ManagementStatusJoystiksView(bool status)
+        {
+            if (Object.HasInputAuthority)
+            {
+                _joysticks.gameObject.SetActive(status);
+            }
         }
         
         [Rpc]

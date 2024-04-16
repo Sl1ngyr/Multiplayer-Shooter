@@ -139582,6 +139582,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb1e51d6a9c4b1cbc5102789b8a004a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerName: {fileID: 786717970}
+  PlayerKills: {fileID: 1911251324}
+  PlayerDamage: {fileID: 1159403593}
 --- !u!224 &361919991
 RectTransform:
   m_ObjectHideFlags: 0
@@ -143976,6 +143979,7 @@ GameObject:
   - component: {fileID: 944921085}
   - component: {fileID: 944921084}
   - component: {fileID: 944921083}
+  - component: {fileID: 944921086}
   m_Layer: 5
   m_Name: Joysticks
   m_TagString: Untagged
@@ -144067,6 +144071,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &944921086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944921081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 2751790132
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours: []
 --- !u!1 &1058973650
 GameObject:
   m_ObjectHideFlags: 0
@@ -145654,7 +145675,6 @@ MonoBehaviour:
   _movementController: {fileID: 3709743678104457054}
   _shotController: {fileID: 1384068676193629981}
   _loadingView: {fileID: 1730055473}
-  _networkSpawner: {fileID: 1876597391}
 --- !u!4 &1735026279
 Transform:
   m_ObjectHideFlags: 0
@@ -146162,6 +146182,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb1e51d6a9c4b1cbc5102789b8a004a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerName: {fileID: 1815813367}
+  PlayerKills: {fileID: 1588528691}
+  PlayerDamage: {fileID: 1950229433}
 --- !u!1 &1876597389
 GameObject:
   m_ObjectHideFlags: 0
@@ -146225,9 +146248,9 @@ MonoBehaviour:
   - {fileID: -4243960104536501256, guid: 305980656dfeb174797fd38e3019c42e, type: 3}
   _bulletsView: {fileID: 935254104}
   _healthView: {fileID: 463932247}
+  _joystiksView: {fileID: 944921086}
   _statisticsPlayers: {fileID: 891187810}
   _waveController: {fileID: 841572561}
-  _PlayerSkin: 
 --- !u!4 &1876597392
 Transform:
   m_ObjectHideFlags: 0

@@ -5,13 +5,13 @@ namespace UI
 {
     public class PlayerResultData : MonoBehaviour
     {
-        private TextMeshProUGUI PlayerName;
-        private TextMeshProUGUI PlayerKills;
-        private TextMeshProUGUI PlayerDamage;
+        [SerializeField] private TextMeshProUGUI PlayerName;
+        [SerializeField] private TextMeshProUGUI PlayerKills;
+        [SerializeField] private TextMeshProUGUI PlayerDamage;
 
         public void Init(string name, string kills, string damage)
         {
-            PlayerName.text = name;
+            PlayerName.text += name;
             PlayerKills.text = kills;
             PlayerDamage.text = damage;
         }
