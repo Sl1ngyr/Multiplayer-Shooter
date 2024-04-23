@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e6607fd1e2478f85bac0c58627cc22, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: 
+  <AttackDistance>k__BackingField: 5
+  <Damage>k__BackingField: 18
+  <ShootDelay>k__BackingField: 0.5
+  <ShootTypeWeapon>k__BackingField: 0
+  <NumberOfBullets>k__BackingField: 50
